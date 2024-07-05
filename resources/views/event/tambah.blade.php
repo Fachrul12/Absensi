@@ -33,6 +33,25 @@
           <label for="nama_event">Nama Event</label>
           <input type="text" class="form-control" id="nama_event" name="nama_event" required>
         </div>
+        
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-12">
+                  <!-- select -->
+                    <div class="form-group">
+                    <label>Kategori Event</label>
+                    <select class="form-control">
+                        <option> - </option>
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
           <label for="tanggal_acara">Tanggal Acara</label>
           <input type="date" class="form-control" id="tanggal_acara" name="tanggal_acara" required>
