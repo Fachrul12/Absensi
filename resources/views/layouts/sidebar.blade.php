@@ -23,7 +23,7 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
-          <a href="/" class="nav-link active">
+          <a href="/" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -32,12 +32,21 @@
         </li>
 
         <li class="nav-item menu-open">
-          <a href="/event" class="nav-link active">
+          <a href="/event" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Acara
             </p>
           </a>
+        </li>
+
+        <li class="nav-item menu-open">
+            <a href="/partai" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Partai
+              </p>
+            </a>
         </li>
         
     </nav>

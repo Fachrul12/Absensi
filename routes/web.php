@@ -22,6 +22,33 @@ Route::get('/event', function () {
     return view('pages/event');
 });
 
+
+//route event
+Route::get('/tambah_event', function () {
+    return view('event/tambah');
+});
+
+Route::get('/view_event', function () {
+    return view('event/view');
+});
+
+Route::get('/tambah_peserta', function () {
+    return view('peserta/tambah');
+});
+
+Route::get('/edit_peserta', function () {
+    return view('peserta/edit');
+});
+
+
+
+
+
+
+Route::get('/partai', function () {
+    return view('pages/partai');
+});
+
 Route::get('/scan', function () {
     return view('welcome', [
         'absen' => Absen::all()
