@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Absen;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages/dashboard');
+});
+
+Route::get('/event', function () {
+    return view('pages/event');
+});
+
+Route::get('/scan', function () {
+    return view('welcome', [
+        'absen' => Absen::all()
+    ]);
+});
+
+Route::post('/store', [AbsensiController::class, 'store']) ->name('store');
+
+// routes/web.php
+Route::get('/datapeserta', function () {
+    return view('datapeserta');
 });

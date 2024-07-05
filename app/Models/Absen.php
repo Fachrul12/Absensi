@@ -14,6 +14,6 @@ class Absen extends Model
 
     public function peserta()
     {
-        return $this->hasOne(Peserta::class, );
+        return $this->hasOne(Peserta::class,'id_peserta','id_peserta');
     }
 }

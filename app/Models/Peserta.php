@@ -9,5 +9,10 @@ class Peserta extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $table = "peserta";
+    protected $primaryKey = "id";
+    protected $fillable = [
+        'id','nama','partai','pendukung_calon'
+    ];
+    
 }
