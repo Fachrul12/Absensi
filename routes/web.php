@@ -1,8 +1,9 @@
 <?php
 
-use App\Models\Absen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\PesertaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,27 +19,14 @@ Route::get('/', function () {
     return view('pages/dashboard');
 });
 
-Route::get('/event', function () {
-    return view('pages/event');
-});
+// Route Event Baru
+Route::resource('events', EventController::class);
 
 
-//route event
-Route::get('/tambah_event', function () {
-    return view('event/tambah');
-});
 
-Route::get('/view_event', function () {
-    return view('event/view');
-});
 
-Route::get('/tambah_peserta', function () {
-    return view('peserta/tambah');
-});
+Route::resource('pesertas', PesertaController::class);
 
-Route::get('/edit_peserta', function () {
-    return view('peserta/edit');
-});
 
 
 
@@ -49,11 +37,7 @@ Route::get('/partai', function () {
     return view('pages/partai');
 });
 
-Route::get('/scan', function () {
-    return view('welcome', [
-        'absen' => Absen::all()
-    ]);
-});
+
 
 Route::post('/store', [AbsensiController::class, 'store']) ->name('store');
 

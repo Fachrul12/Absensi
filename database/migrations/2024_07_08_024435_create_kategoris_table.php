@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePesertasTable extends Migration
+class CreateKategorisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatePesertasTable extends Migration
      */
     public function up()
     {
-        Schema::create('pesertas', function (Blueprint $table) {
+        Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_peserta');
-            $table->string('nama');
-            $table->string('partai');
-            $table->enum('pendukung_calon', ['paslon 1', 'paslon 2', 'paslon 3']);
-            $table->string('foto');
+            $table->string('nama_kategori');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreatePesertasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pesertas');
+        Schema::dropIfExists('kategoris');
     }
 }

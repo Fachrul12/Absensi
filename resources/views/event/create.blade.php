@@ -27,7 +27,7 @@
     <!-- /.card-header -->
 
     <div class="card-body">
-      <form action="/tambah_event" method="post">
+      <form action="{{ route('events.store') }}" method="post">
         @csrf
         <div class="form-group">
           <label for="nama_event">Nama Event</label>
@@ -40,12 +40,11 @@
                   <!-- select -->
                     <div class="form-group">
                     <label>Kategori Event</label>
-                    <select class="form-control">
-                        <option> - </option>
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
+                    <select class="form-control" name="kategori_id">
+                        <option value=""> - </option>
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>

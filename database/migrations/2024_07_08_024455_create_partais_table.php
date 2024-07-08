@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsensTable extends Migration
+class CreatePartaisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAbsensTable extends Migration
      */
     public function up()
     {
-        Schema::create('absens', function (Blueprint $table) {
+        Schema::create('partais', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_peserta');
-            $table->date('tanggal');
+            $table->string('nama_partai');
+            $table->string('bendera_partai');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateAbsensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absens');
+        Schema::dropIfExists('partais');
     }
 }

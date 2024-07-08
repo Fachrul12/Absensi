@@ -30,7 +30,8 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-<form>
+    <form action="{{ route('pesertas.store') }}" method="post" enctype="multipart/form-data">
+      @csrf
     <div class="card-body">
         <div class="form-group">
             <label for="nama_peserta">Nama Peserta</label>

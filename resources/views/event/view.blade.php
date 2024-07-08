@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-10">
-          <h1 class="m-0">Event | (nanti disini nama event dari event yg dilihat)</h1>
+          <h1 class="m-0">Event | {{ $event->nama_event }}</h1>
         </div><!-- /.col -->
         <div class="col-sm-2">
           <ol class="breadcrumb float-sm-right">
@@ -23,7 +23,7 @@
   {{-- Button diatas table --}}
     <div class="col-md-2">
       <div class=" ml-2 mt-3">
-        <a href="/tambah_peserta" class="btn btn-success btn-sm w-100">
+        <a href="{{ route('pesertas.create', $event->id) }}" class="btn btn-success btn-sm w-100">
           Tambah <i class="fas fa-plus"></i>
         </a>
       </div>
@@ -85,34 +85,37 @@
           </tr>
         </thead>
         <tbody>
-
+          @foreach($pesertas as $peserta)
           <tr>
-            <td>1</td>
+            <td>{{ $loop->iteration }}</td>
             <td>
                 <img src="{{ asset('dist/img/avatar.png') }}" alt="Avatar" width="30" height="30" class="img-fluid rounded">
             </td>
-            <td>Ahmad iqbal Siregar</td>
-            <td>Golkar</td>
-            <td>Paslon 1</td>
+            <td>{{ $peserta->nama_peserta }}</td>
+            <td>{{ $peserta->partai->nama_partai}}</td>
+            <td>{{ $peserta->pendukungCalon->nama_calon}}</td>
             <td class="project-actions text-right">
-                <a class="btn btn-primary btn-sm" href="/view_event">
-                    <i class="fas fa-folder">
-                    </i>
-                    View
-                </a>
-                <a class="btn btn-info btn-sm" href="/edit_peserta">
-                    <i class="fas fa-pencil-alt">
-                    </i>
-                    Edit
-                </a>
-                <a class="btn btn-danger btn-sm" href="#">
-                    <i class="fas fa-trash">
-                    </i>
-                    Delete
-                </a>
-            </td>
+              <div class="btn-group">
+                  <a class="btn btn-primary btn-sm" href="{{ route('pesertas.show', $peserta->id) }}">
+                      <i class="fas fa-folder"></i>
+                      View
+                  </a>
+                  <a class="btn btn-info btn-sm" href="{{ route('pesertas.edit', $peserta->id) }}">
+                      <i class="fas fa-pencil-alt"></i>
+                      Edit
+                  </a>
+                  <form action="{{ route('pesertas.destroy', $peserta->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm">
+                          <i class="fas fa-trash"></i>
+                          Delete
+                      </button>
+                  </form>
+              </div>
+          </td>
           </tr>
-        
+          @endforeach
         </tbody>
       </table>
     </div>
