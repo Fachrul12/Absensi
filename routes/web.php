@@ -25,9 +25,8 @@ Route::resource('events', EventController::class);
 
 
 
+//Route::resource('pesertas', PesertaController::class);
 Route::resource('pesertas', PesertaController::class);
-
-
 
 
 

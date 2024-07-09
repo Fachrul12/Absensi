@@ -35,60 +35,55 @@
     <div class="card-body">
         <div class="form-group">
             <label for="nama_peserta">Nama Peserta</label>
-            <input type="text" class="form-control" id="nama_peserta" placeholder="Masukkan Nama">
+            <input type="text" class="form-control" id="nama_peserta" name="nama_peserta" placeholder="Masukkan Nama">
         </div>
 
         <div class="form-group">
-            <div class="row">
-                <div class="col-sm-12">
+          <div class="row">
+              <div class="col-sm-12">
                   <!-- select -->
-                    <div class="form-group">
-                    <label>Partai</label>
-                    <select class="form-control">
-                        <option> - </option>
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+                  <div class="form-group">
+                      <label>Partai</label>
+                      <select class="form-control" name="nama_partai">
+                          @foreach($partais as $partai)
+                              <option value="{{ $partai->id }}">{{ $partai->nama_partai }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+          </div>
+      </div>
 
 
         <div class="form-group">
-            <div class="row">
-                <div class="col-sm-12">
+          <div class="row">
+              <div class="col-sm-12">
                   <!-- select -->
-                    <div class="form-group">
-                    <label>Pendukung Calon</label>
-                    <select class="form-control">
-                        <option> - </option>
-                        <option>option 1</option>
-                        <option>option 2</option>
-                        <option>option 3</option>
-                        <option>option 4</option>
-                    </select>
-                    </div>
-                </div>
+                  <div class="form-group">
+                      <label>Pendukung Calon</label>
+                      <select class="form-control" name="pendukung_calon">
+                          @foreach($pendukung_calons as $calon)
+                              <option value="{{ $calon->id }}">{{ $calon->nama_calon }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="foto_peserta">Foto Peserta</label>
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="foto_peserta" name="foto_peserta">
+                <label class="custom-file-label" for="foto_peserta" id="file-label">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text">Upload</span>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="foto_peserta">Foto Peserta</label>
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="foto_peserta">
-                    <label class="custom-file-label" for="foto_peserta">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                    <span class="input-group-text">Upload</span>
-                </div>
-                </div>
-            </div>
     </div>
+    
       <!-- /.card-body -->
 
     <div class="card-footer">
@@ -97,6 +92,11 @@
 </form>
 </div>
 
-
+<script>
+  document.getElementById('foto_peserta').addEventListener('change', function() {
+      var fileName = this.files[0].name;
+      document.getElementById('file-label').innerHTML = fileName;
+  });
+</script>
 
   @endsection

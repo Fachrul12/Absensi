@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Kategori;
 use App\Models\Peserta;
+use App\Models\PendukungCalon;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -38,15 +39,26 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $event = new Event();
+{
+    $event = new Event();
     $event->nama_event = $request->input('nama_event');
     $event->kategori_id = $request->input('kategori_id');
     $event->tanggal_acara = $request->input('tanggal_acara');
     $event->status = 0; // Set a default value for status
-    $event->save();
-        return redirect()->route('event.index');
+    $event->save(); // Save the event instance first
+
+    $pendukung_calon = $request->input('pendukung_calon');
+
+    foreach ($pendukung_calon as $calon) {
+        PendukungCalon::create([
+            'event_id' => $event->id, // Use the saved event ID
+            'nama_calon' => $calon,
+            // Add other columns as needed
+        ]);
     }
+
+    return redirect()->route('events.index');
+}
 
     /**
      * Display the specified resource.

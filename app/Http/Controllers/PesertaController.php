@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peserta;
+use App\Models\Partai;
+use App\Models\PendukungCalon;
+use App\Models\Kategori;
 
 class PesertaController extends Controller
 {
@@ -24,9 +27,12 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('pesertas.create');
-    }
+{
+    $partais = Partai::all();
+    $pendukung_calons = PendukungCalon::all();
+
+    return view('peserta.create', compact('partais', 'pendukung_calons'));
+}
 
     /**
      * Store a newly created resource in storage.
@@ -38,17 +44,21 @@ class PesertaController extends Controller
     {
         $request->validate([
             'nama_peserta' => 'required|string',
-            'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|string',
-            'alamat' => 'required|string',
+            
+            
             // add more validation rules as needed
         ]);
 
         $peserta = new Peserta();
         $peserta->nama_peserta = $request->input('nama_peserta');
-        $peserta->tanggal_lahir = $request->input('tanggal_lahir');
-        $peserta->jenis_kelamin = $request->input('jenis_kelamin');
-        $peserta->alamat = $request->input('alamat');
+        $peserta->partai_id = $request->input('nama_partai'); 
+        $peserta->pendukung_calon_id = $request->input('pendukung_calon_id'); 
+        $peserta->foto_peserta = $request->file('foto_peserta');
+        // Get the uploaded file
+    $file = $request->file('foto_peserta');
+
+    // Do something with the file, e.g., store it in storage
+    $file->storeAs('public/foto_peserta', $file->getClientOriginalName());
         // add more fields as needed
         $peserta->save();
 

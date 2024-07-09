@@ -18,7 +18,7 @@ class CreatePesertasTable extends Migration
             $table->string('nama_peserta');
             $table->unsignedBigInteger('partai_id');
             $table->unsignedBigInteger('pendukung_calon_id');
-            $table->string('foto_peserta');
+            $table->string('foto_peserta')->nullable()->change();
             $table->unsignedBigInteger('event_id');
             $table->string('qr_code');
             $table->timestamps();
@@ -36,6 +36,8 @@ class CreatePesertasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pesertas');
+        Schema::table('pesertas',function (Blueprint $table) {
+            $table->string('foto_peserta')->change();
+        });
     }
 }

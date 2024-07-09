@@ -60,7 +60,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $event->nama_event }}</td>
-                            <td>{{ $event->participants->count() or 0 }}</td>
+                            <td>{{ optional($event->peserta)->count()?? 0 }}</td>
                             <td>{{ $event->tanggal_acara }}</td>
                             <td class="project-actions text-right">
                                 <div class="btn-group">

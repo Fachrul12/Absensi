@@ -52,6 +52,17 @@
         </div>
 
         <div class="form-group">
+          <label for="pendukung_calon">Pendukung Calon</label>
+          <div id="pendukung-calon-inputs">
+            <div class="input-group mb-2">
+              <input type="text" class="form-control" name="pendukung_calon[]" placeholder="Nama Pendukung Calon 1">
+              <button class="btn btn-danger remove-input" type="button">-</button>
+            </div>
+          </div>
+          <button class="btn btn-primary add-input" type="button">Tambah Pendukung Calon</button>
+        </div>
+
+        <div class="form-group">
           <label for="tanggal_acara">Tanggal Acara</label>
           <input type="date" class="form-control" id="tanggal_acara" name="tanggal_acara" required>
         </div>
@@ -61,4 +72,32 @@
     <!-- /.card-body -->
   </div>
 
+
+  <script>
+    let inputCount = 1;
+  
+    document.addEventListener("DOMContentLoaded", function() {
+      const addInputButton = document.querySelector(".add-input");
+      const removeInputButtons = document.querySelectorAll(".remove-input");
+  
+      addInputButton.addEventListener("click", function() {
+        inputCount++;
+        const newInput = document.createElement("div");
+        newInput.innerHTML = `
+          <div class="input-group mb-2">
+            <input type="text" class="form-control" name="pendukung_calon[]" placeholder="Nama Pendukung Calon ${inputCount}">
+            <button class="btn btn-danger remove-input" type="button">-</button>
+          </div>
+        `;
+        document.getElementById("pendukung-calon-inputs").appendChild(newInput);
+      });
+  
+      removeInputButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+          button.parentNode.remove();
+          inputCount--;
+        });
+      });
+    });
+  </script>
 @endsection
