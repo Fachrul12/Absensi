@@ -80,11 +80,13 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $event = Event::findOrFail($id);
-        $kategoris = Kategori::all();
-        return view('event.edit', compact('event', 'kategoris'));
-    }
+{
+    $event = Event::findOrFail($id);
+    $kategoris = Kategori::all();
+    $pendukung_calon = PendukungCalon::where('event_id', $id)->get();
+
+    return view('event.edit', compact('event', 'kategoris', 'pendukung_calon'));
+}
 
 
     /**
@@ -95,21 +97,34 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama_event' => 'required',
-            'kategori_event' => 'required',
-            'tanggal_acara' => 'required',
+{
+    $event = Event::findOrFail($id);
+
+    $request->validate([
+        'nama_event' => 'required|string',
+        'kategori_id' => 'required|exists:kategoris,id',
+        'tanggal_acara' => 'required|date',
+        'pendukung_calon' => 'nullable|array',
+        'pendukung_calon.*' => 'nullable|string',
+    ]);
+
+    $event->nama_event = $request->input('nama_event');
+    $event->kategori_id = $request->input('kategori_id');
+    $event->tanggal_acara = $request->input('tanggal_acara');
+
+    $event->save();
+
+    // Update pendukung_calon records
+    PendukungCalon::where('event_id', $id)->delete();
+    foreach ($request->input('pendukung_calon') as $calon) {
+        PendukungCalon::create([
+            'event_id' => $id,
+            'nama_calon' => $calon,
         ]);
-
-        $event = Event::findOrFail($id);
-        $event->nama_event = $request->nama_event;
-        $event->kategori_event = $request->kategori_event;
-        $event->tanggal_acara = $request->tanggal_acara;
-        $event->save();
-
-        return redirect('/event')->with('success', 'Event berhasil diubah');
     }
+
+    return redirect()->route('events.index')->with('success', 'Event updated successfully!');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -118,10 +133,14 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $event = Event::findOrFail($id);
-        $event->delete();
+{
+    $event = Event::findOrFail($id);
 
-        return redirect('/event')->with('success', 'Event berhasil dihapus');
-    }
+    // Delete pendukung_calon records associated with the event
+    PendukungCalon::where('event_id', $id)->delete();
+
+    $event->delete();
+
+    return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
+}
 }

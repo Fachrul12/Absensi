@@ -16,7 +16,7 @@ class Event extends Model
         'tanggal_acara',
     ];
 
-    public function participants()
+    public function peserta()
     {
     return $this->hasMany(Peserta::class);
     }

@@ -35,21 +35,25 @@
         </div>
         
         <div class="form-group">
-            <div class="row">
-                <div class="col-sm-12">
+          <div class="row">
+              <div class="col-sm-12">
                   <!-- select -->
-                    <div class="form-group">
-                    <label>Kategori Event</label>
-                    <select class="form-control" name="kategori_id">
-                        <option value=""> - </option>
-                        @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
-                        @endforeach
-                    </select>
-                    </div>
-                </div>
-            </div>
-        </div>
+                  <div class="form-group">
+                      <label>Kategori Event</label>
+                      @if($kategoris->isEmpty())
+                          <p>Tidak ada kategori tersedia. <a href="{{ route('kategoris.create') }}" class="btn btn-primary btn-sm">Tambah Kategori</a></p>
+                      @else
+                          <select class="form-control" name="kategori_id">
+                              <option value=""> - </option>
+                              @foreach ($kategoris as $kategori)
+                                  <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                              @endforeach
+                          </select>
+                      @endif
+                  </div>
+              </div>
+          </div>
+      </div>
 
         <div class="form-group">
           <label for="pendukung_calon">Pendukung Calon</label>
