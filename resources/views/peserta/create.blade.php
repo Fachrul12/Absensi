@@ -44,7 +44,7 @@
                   <!-- select -->
                   <div class="form-group">
                       <label>Partai</label>
-                      <select class="form-control" name="nama_partai">
+                      <select class="form-control" name="partai_id">
                           @foreach($partais as $partai)
                               <option value="{{ $partai->id }}">{{ $partai->nama_partai }}</option>
                           @endforeach
@@ -52,23 +52,23 @@
                   </div>
               </div>
           </div>
-      </div>
+        </div>
 
 
-        <div class="form-group">
-          <div class="row">
-              <div class="col-sm-12">
-                  <!-- select -->
-                  <div class="form-group">
-                      <label>Pendukung Calon</label>
-                      <select class="form-control" name="pendukung_calon">
-                          @foreach($pendukung_calons as $calon)
-                              <option value="{{ $calon->id }}">{{ $calon->nama_calon }}</option>
-                          @endforeach
-                      </select>
-                  </div>
-              </div>
-          </div>
+      <div class="form-group">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- select -->
+                <div class="form-group">
+                    <label>Pendukung Calon</label>
+                    <select class="form-control" name="pendukung_calon_id">
+                        @foreach($pendukung_calons as $calon)
+                            <option value="{{ $calon->id }}">{{ $calon->nama_calon }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
       </div>
 
       <div class="form-group">

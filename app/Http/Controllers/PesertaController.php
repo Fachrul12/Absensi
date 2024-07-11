@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Peserta;
 use App\Models\Partai;
 use App\Models\PendukungCalon;
+use App\Models\Event;
 use App\Models\Kategori;
 
 class PesertaController extends Controller
@@ -15,23 +16,25 @@ class PesertaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $pesertas = Peserta::all();
-        return view('pesertas.index', compact('pesertas'));
-    }
+    public function index($eventId)
+{
+    $event = Event::find($eventId);
+    $pesertas = Peserta::where('event_id', $eventId)->get();
+    return view('event.view', compact('event', 'pesertas'));
+}
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
 {
     $partais = Partai::all();
+    $eventId = $request->route('eventId');
     $pendukung_calons = PendukungCalon::all();
 
-    return view('peserta.create', compact('partais', 'pendukung_calons'));
+    return view('peserta.create', compact('eventId', 'partais', 'pendukung_calons'));
 }
 
     /**
@@ -41,29 +44,31 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama_peserta' => 'required|string',
-            
-            
-            // add more validation rules as needed
-        ]);
+{
+    $request->validate([
+        'nama_peserta' => 'required|string',
+        // add more validation rules as needed
+    ]);
 
-        $peserta = new Peserta();
-        $peserta->nama_peserta = $request->input('nama_peserta');
-        $peserta->partai_id = $request->input('nama_partai'); 
-        $peserta->pendukung_calon_id = $request->input('pendukung_calon_id'); 
-        $peserta->foto_peserta = $request->file('foto_peserta');
-        // Get the uploaded file
+    $peserta = new Peserta();
+    $peserta->nama_peserta = $request->input('nama_peserta');
+    $peserta->partai_id = $request->input('partai_id');
+    $peserta->pendukung_calon_id = $request->input('pendukung_calon_id');
+
     $file = $request->file('foto_peserta');
-
-    // Do something with the file, e.g., store it in storage
     $file->storeAs('public/foto_peserta', $file->getClientOriginalName());
-        // add more fields as needed
-        $peserta->save();
+    $peserta->foto_peserta = $file->getClientOriginalName();
+    
+    $peserta->event_id = $request->input('eventId'); 
+    $peserta->save();
 
-        return redirect()->route('pesertas.index')->with('success', 'Peserta created successfully!');
-    }
+    $eventId = $request->input('eventId');
+    $event = Event::find($eventId);
+    $pesertas = Peserta::where('event_id', $eventId)->get();
+
+
+    return view('event.view', compact('event', 'pesertas'));
+}
 
     /**
      * Display the specified resource.

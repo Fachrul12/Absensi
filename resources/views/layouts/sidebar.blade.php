@@ -41,7 +41,7 @@
         </li>
 
         <li class="nav-item menu-open">
-            <a href="/partai" class="nav-link">
+            <a href="/partais" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Partai

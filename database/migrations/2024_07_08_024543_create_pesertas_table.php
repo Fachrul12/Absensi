@@ -12,32 +12,27 @@ class CreatePesertasTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('pesertas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_peserta');
-            $table->unsignedBigInteger('partai_id');
-            $table->unsignedBigInteger('pendukung_calon_id');
-            $table->string('foto_peserta')->nullable()->change();
-            $table->unsignedBigInteger('event_id');
-            $table->string('qr_code');
-            $table->timestamps();
+{
+    Schema::create('pesertas', function (Blueprint $table) {
+        $table->id();
+        $table->string('nama_peserta');
+        $table->unsignedBigInteger('partai_id');
+        $table->unsignedBigInteger('pendukung_calon_id');
+        $table->string('foto_peserta')->nullable();
+        $table->unsignedBigInteger('event_id')->nullable();
+        $table->string('qr_code')->nullable();
+        $table->timestamps();
 
-            $table->foreign('partai_id')->references('id')->on('partais');
-            $table->foreign('pendukung_calon_id')->references('id')->on('pendukung_calons');
-            $table->foreign('event_id')->references('id')->on('events');
-        });
-    }
+        $table->foreign('partai_id')->references('id')->on('partais');
+        $table->foreign('pendukung_calon_id')->references('id')->on('pendukung_calons');
+        $table->foreign('event_id')->references('id')->on('events');
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('pesertas',function (Blueprint $table) {
-            $table->string('foto_peserta')->change();
-        });
-    }
+public function down()
+{
+    Schema::table('pesertas', function (Blueprint $table) {
+        $table->dropColumn('foto_peserta');
+    });
+}
 }
