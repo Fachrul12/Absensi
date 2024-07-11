@@ -31,10 +31,10 @@ class PesertaController extends Controller
     public function create(Request $request)
 {
     $partais = Partai::all();
-    $eventId = $request->eventId;
+    $eventId = $request->route('eventId');
     $pendukung_calons = PendukungCalon::all();
 
-    return view('peserta.create', compact('partais', 'pendukung_calons', 'eventId'));
+    return view('peserta.create', compact('eventId', 'partais', 'pendukung_calons'));
 }
 
     /**
@@ -58,6 +58,7 @@ class PesertaController extends Controller
     $file = $request->file('foto_peserta');
     $file->storeAs('public/foto_peserta', $file->getClientOriginalName());
     $peserta->foto_peserta = $file->getClientOriginalName();
+    
     $peserta->event_id = $request->input('eventId'); 
     $peserta->save();
 

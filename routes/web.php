@@ -30,8 +30,13 @@ Route::get('/events/{id}', 'EventController@show')->name('events.show');
 Route::resource('pesertas', PesertaController::class);
 // Route::get('/events/{eventId}', 'EventController@show');
 // Route::get('/pesertas/create?{eventId}', 'PesertaController@create')->name('pesertas.create');
-Route::get('/pesertas/create?{eventId}', 'PesertaController@create')->name('pesertas.create');
-Route::get('/pesertas/{eventId}', 'PesertaController@index')->name('pesertas.index');
+Route::get('/pesertas/create/{eventId}', 'PesertaController@create')->name('pesertas.create');
+Route::get('/events/{eventId}', 'PesertaController@index')->name('pesertas.index');
+
+Route::controller(PesertaController::class)->group(function () {
+    Route::get('/pesertas/create/{eventId}', 'create')->name('pesertas.create');
+});
+
 
 Route::resource('kategoris', KategoriController::class);
 

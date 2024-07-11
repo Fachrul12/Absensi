@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <input type="hidden" name="eventId" value="{{ $eventId }}">
+    <input type="hidden" name="eventId" value="{{ $eventId }}" readonly>
     
     
       <!-- /.card-body -->

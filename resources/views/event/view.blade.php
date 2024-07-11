@@ -23,7 +23,7 @@
   {{-- Button diatas table --}}
     <div class="col-md-2">
       <div class=" ml-2 mt-3">
-        <a href="{{ route('pesertas.create', $event->id) }}" class="btn btn-success btn-sm w-100">
+        <a href="/pesertas/create/{{ $event->id }}" class="btn btn-success btn-sm w-100">
           Tambah <i class="fas fa-plus"></i>
         </a>
       </div>
@@ -89,7 +89,7 @@
           <tr>
             <td>{{ $loop->iteration }}</td>
             <td>
-                <img src="{{ asset('dist/img/avatar.png') }}" alt="Avatar" width="30" height="30" class="img-fluid rounded">
+              <img src="{{ asset('storage/foto_peserta/'. $peserta->foto_peserta) }}" alt="Avatar" width="30" height="30" class="img-fluid rounded">
             </td>
             <td>{{ $peserta->nama_peserta }}</td>
             <td>{{ $peserta->partai->nama_partai}}</td>
