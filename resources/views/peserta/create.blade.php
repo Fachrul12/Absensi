@@ -79,9 +79,6 @@
         </div>
     </div>
 
-    <input type="hidden" name="eventId" value="{{ $eventId }}" readonly>
-    
-    
       <!-- /.card-body -->
 
     <div class="card-footer">

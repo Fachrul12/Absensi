@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Event</h1>
+                    <h1 class="m-0">Acara</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Event</li>
+                        <li class="breadcrumb-item active">Acara</li>
                     </ol>
                 </div>
             </div>
@@ -42,14 +42,14 @@
 
     <div class="card ml-3 mr-3">
         <div class="card-header">
-            <h3 class="card-title">List Event</h3>
+            <h3 class="card-title">List Acara</h3>
         </div>
         <div class="card-body p-0">
             <table class="table table-condensed table-striped">
                 <thead>
                     <tr>
                         <th style="width: 10px">No</th>
-                        <th>Nama Event</th>
+                        <th>Nama Acara</th>
                         <th>Peserta</th>
                         <th>Tanggal Acara</th>
                         <th style="width: 30%"></th>
@@ -66,18 +66,18 @@
                                 <div class="btn-group">
                                     <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('events.show', $event->id) }}">
                                         <i class="fas fa-folder"></i>
-                                        View
+                                        Lihat
                                     </a>
                                     <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('events.edit', $event->id) }}">
                                         <i class="fas fa-pencil-alt"></i>
-                                        Edit
+                                        Ubah
                                     </a>
                                     <form action="{{ route('events.destroy', $event->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm d-inline">
                                             <i class="fas fa-trash"></i>
-                                            Delete
+                                            Hapus
                                         </button>
                                     </form>
                                 </div>
