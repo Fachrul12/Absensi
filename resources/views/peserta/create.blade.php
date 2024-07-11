@@ -19,11 +19,6 @@
     <hr class="m-0">
 </div>
 
-
-
-
-
-
 <div class="card card-primary ml-3 mr-3">
     <div class="card-header">
         <h3 class="card-title">Form Peserta</h3>

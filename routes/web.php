@@ -28,8 +28,6 @@ Route::get('/events/{id}', 'EventController@show')->name('events.show');
 
 
 Route::resource('pesertas', PesertaController::class);
-// Route::get('/events/{eventId}', 'EventController@show');
-// Route::get('/pesertas/create?{eventId}', 'PesertaController@create')->name('pesertas.create');
 Route::get('/pesertas/create/{eventId}', 'PesertaController@create')->name('pesertas.create');
 Route::get('/events/{eventId}', 'PesertaController@index')->name('pesertas.index');
 
@@ -54,9 +52,8 @@ Route::get('/kategori', function () {
 
 
 
-Route::post('/store', [AbsensiController::class, 'store']) ->name('store');
+// File: routes/web.php
 
-// routes/web.php
-Route::get('/datapeserta', function () {
-    return view('datapeserta');
-});
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
