@@ -98,11 +98,11 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $kategori = Kategori::findOrFail($id);
-        $kategori->delete();
+{
+    $kategori = Kategori::findOrFail($id);
+    $kategori->delete();
 
-        return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil dihapus');
-    }
+    return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil dihapus');
+}
 }
 

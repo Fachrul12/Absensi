@@ -39,6 +39,7 @@ Route::controller(PesertaController::class)->group(function () {
 
 
 Route::resource('kategoris', KategoriController::class);
+Route::get('/kategoris/{eventId}', 'PesertaController@index')->name('pesertas.index');
 
 Route::resource('partais', PartaiController::class);
 
