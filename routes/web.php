@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('pages/dashboard');
 });
 
+
+
 // Route Event Baru
 Route::resource('events', EventController::class);
 Route::get('/events/{id}', 'EventController@show')->name('events.show');
@@ -52,8 +54,7 @@ Route::get('/kategori', function () {
 
 
 
-// File: routes/web.php
 
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'Auth\LoginController@login');
-Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/login', function () {
+    return view('login');
+});

@@ -1,7 +1,5 @@
 @extends('layouts.main')
-
 @section('content')
-
 <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -25,14 +23,13 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form action="{{ route('pesertas.store') }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('pesertas.store') }}" method="post" enctype="multipart/form-data">
       @csrf
     <div class="card-body">
         <div class="form-group">
             <label for="nama_peserta">Nama Peserta</label>
             <input type="text" class="form-control" id="nama_peserta" name="nama_peserta" placeholder="Masukkan Nama">
         </div>
-
         <div class="form-group">
           <div class="row">
               <div class="col-sm-12">
@@ -48,8 +45,6 @@
               </div>
           </div>
         </div>
-
-
       <div class="form-group">
         <div class="row">
             <div class="col-sm-12">
@@ -65,7 +60,6 @@
             </div>
         </div>
       </div>
-
       <div class="form-group">
         <label for="foto_peserta">Foto Peserta</label>
         <div class="input-group">
@@ -77,16 +71,18 @@
                 <span class="input-group-text">Upload</span>
             </div>
         </div>
-    </div>
+      </div>
+
+    <input type="hidden" name="eventId" value="{{ $eventId }}" readonly>
+
 
       <!-- /.card-body -->
 
     <div class="card-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</form>
+  </form>
 </div>
-
 <script>
   document.getElementById('foto_peserta').addEventListener('change', function() {
       var fileName = this.files[0].name;
