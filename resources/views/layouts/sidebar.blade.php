@@ -21,7 +21,7 @@
            with font-awesome or any other icon font library -->
       <li class="nav-item menu-open">
         <a href="/" class="nav-link">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-home"></i>
           <p>
             Dashboard
           </p>
@@ -29,7 +29,7 @@
       </li>
       <li class="nav-item menu-open">
         <a href="/events" class="nav-link">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-calendar"></i>
           <p>
             Acara
           </p>
@@ -37,7 +37,7 @@
       </li>
       <li class="nav-item menu-open">
           <a href="/partais" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-users"></i>
             <p>
               Partai
             </p>
@@ -46,7 +46,7 @@
 
       <li class="nav-item menu-open">
         <a href="/kategoris" class="nav-link">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-tags"></i>
           <p>
             Kategori
           </p>

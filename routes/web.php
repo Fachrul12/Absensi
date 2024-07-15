@@ -6,6 +6,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PartaiController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,15 @@ use App\Http\Controllers\PartaiController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+
+// routes/web.php
+Route::get('/register',[RegisterController::class, 'index'] );
+Route::post('/register', [RegisterController::class, 'store']);
+
+
+Route::get('/dashboard', function () {
     return view('pages/dashboard');
 });
 
@@ -52,10 +62,3 @@ Route::get('/kategori', function () {
     return view('pages/kategori');
 });
 
-
-
-
-
-Route::get('/login', function () {
-    return view('login');
-});
