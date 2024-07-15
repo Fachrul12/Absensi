@@ -1,5 +1,5 @@
 @extends('layouts.main')
-
+@inject('carbon', '\Carbon\Carbon')
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -52,6 +52,7 @@
                         <th>Nama Acara</th>
                         <th>Peserta</th>
                         <th>Tanggal Acara</th>
+                        <th>Status Acara</th>
                         <th style="width: 30%"></th>
                     </tr>
                 </thead>
@@ -62,6 +63,18 @@
                             <td>{{ $event->nama_event }}</td>
                             <td>{{ optional($event->peserta)->count()?? 0 }}</td>
                             <td>{{ $event->tanggal_acara }}</td>
+                            <td>
+                                @php
+                                    $tanggalAcara = \Carbon\Carbon::parse($event->tanggal_acara);
+                                @endphp
+                                @if($tanggalAcara < now()->startOfDay())
+                                    <span class="badge badge-success">Selesai</span>
+                                @elseif($tanggalAcara->isToday())
+                                    <span class="badge badge-primary">Berlangsung</span>
+                                @else
+                                    <span class="badge badge-danger">Belum Selesai</span>
+                                @endif
+                            </td>
                             <td class="project-actions text-right">
                                 <div class="btn-group">
                                     <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('events.show', $event->id) }}">
