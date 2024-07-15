@@ -17,7 +17,6 @@
         </div>
         <hr class="m-0">
     </div>
-
     <div class="row">
         <div class="col-md-2">
             <div class="ml-3 mt-3">
@@ -49,7 +48,7 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">No</th>
-                        <th>Nama Acara</th>
+                        <th>Nama Event</th>
                         <th>Peserta</th>
                         <th>Tanggal Acara</th>
                         <th>Status Acara</th>
@@ -79,10 +78,12 @@
                                 <div class="btn-group">
                                     <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('events.show', $event->id) }}">
                                         <i class="fas fa-folder"></i>
+
                                         Lihat
                                     </a>
                                     <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('events.edit', $event->id) }}">
                                         <i class="fas fa-pencil-alt"></i>
+
                                         Ubah
                                     </a>
                                     <form action="{{ route('events.destroy', $event->id) }}" method="POST">
@@ -90,6 +91,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm d-inline">
                                             <i class="fas fa-trash"></i>
+
                                             Hapus
                                         </button>
                                     </form>
