@@ -16,7 +16,7 @@
   </div>
   <!-- Sidebar Menu -->
   <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
       <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
       <li class="nav-item menu-open">
@@ -27,32 +27,45 @@
           </p>
         </a>
       </li>
-      <li class="nav-item menu-open">
-        <a href="/events" class="nav-link">
-          <i class="nav-icon fas fa-calendar"></i>
+    @can('admin')
+    <li class="nav-header">ADMINISTRATOR</li>
+    <li class="nav-item menu-open">
+      <a href="/events" class="nav-link">
+        <i class="nav-icon fas fa-calendar"></i>
+        <p>
+          Acara
+        </p>
+      </a>
+    </li>
+    <li class="nav-item menu-open">
+      <a href="/partais" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
           <p>
-            Acara
+            Partai
           </p>
-        </a>
-      </li>
-      <li class="nav-item menu-open">
-          <a href="/partais" class="nav-link">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Partai
-            </p>
-          </a>
-      </li>
-
-      <li class="nav-item menu-open">
-        <a href="/kategoris" class="nav-link">
-          <i class="nav-icon fas fa-tags"></i>
+      </a>
+    </li>
+    <li class="nav-item menu-open">
+      <a href="/kategoris" class="nav-link">
+        <i class="nav-icon fas fa-tags"></i>
           <p>
             Kategori
           </p>
-        </a>
+      </a>
     </li>
-
+    <li class="nav-item menu-open">
+      <a href="/users" class="nav-link">
+        <i class="nav-icon fas fa-user"></i>
+          <p>
+            Pengguna
+          </p>
+      </a>
+    </li>
+    @endcan
+    
+      
+  </ul>
+   
   </nav>
   <!-- /.sidebar-menu -->
 

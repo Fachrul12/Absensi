@@ -84,10 +84,7 @@
         </form>           
         </div>
         <!-- /.login-card-body -->
-      </div>
-        <p class="mb-1 mt-3 text-center">
-        <a href="/register">Register a new membership</a>
-        </p>  
+      </div>          
     </div>
     <!-- /.login-box -->
     
