@@ -27,13 +27,7 @@
   <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="/dist/img/KPU.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
-
+<div class="wrapper">  
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
@@ -55,16 +49,10 @@
       <!-- Navbar Search -->
 
       <li class="nav-item">
-<<<<<<< HEAD
-          <a class="nav-link" href="{{ route('logout') }}" 
-             onclick="event.preventDefault(); document.getElementById('logout-form').submit();" role="button">
-              <i class="fas fa-sign-out-alt"></i>
-          </a>
-=======
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal" data-backdrop="false" title="Logout">
-            <i class="fas fa-sign-out-alt"></i>
-          </a>
-
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      
         <!-- Logout Modal -->
         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -80,7 +68,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <form id="logout-form" action="#" method="POST">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
                   @csrf
                   <button type="submit" class="btn btn-primary">Keluar</button>
                 </form>
@@ -88,8 +76,8 @@
             </div>
           </div>
         </div>
->>>>>>> ee4d1443a3b50524134054ee5f515053378f3545
       </li>
+      
       <!-- Messages Dropdown Menu -->
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
