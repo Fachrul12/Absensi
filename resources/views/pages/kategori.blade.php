@@ -72,13 +72,13 @@
                               Edit
                           </a>
                           <form action="{{ route('kategoris.destroy', $kategori->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm d-inline">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                            </button>
-                        </form> 
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger btn-sm d-inline">
+                                  <i class="fas fa-trash"></i>
+                                  Delete
+                              </button>
+                          </form>  
                       </div>
                   </td>                                                             
               </tr>

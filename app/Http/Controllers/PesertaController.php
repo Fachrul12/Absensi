@@ -67,7 +67,7 @@ class PesertaController extends Controller
     $pesertas = Peserta::where('event_id', $eventId)->get();
 
 
-    return redirect()->route('pesertas.index', $eventId)->with('success', 'Peserta berhasil ditambah');
+    return view('event.view', compact('event', 'pesertas'));
 }
 
     /**
@@ -89,14 +89,10 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-{
-    $peserta = Peserta::find($id);
-    $partais = Partai::all();
-    $pendukung_calons = PendukungCalon::all();
-    $eventId = $peserta->event_id;
-
-    return view('peserta.edit', compact('peserta', 'partais', 'pendukung_calons', 'eventId'));
-}
+    {
+        $peserta = Peserta::find($id);
+        return view('pesertas.edit', compact('peserta'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -106,31 +102,25 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'nama_peserta' => 'required|string',
-        // add more validation rules as needed
-    ]);
+    {
+        $request->validate([
+            'nama_peserta' => 'required|string',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string',
+            'alamat' => 'required|string',
+            // add more validation rules as needed
+        ]);
 
-    $peserta = Peserta::find($id);
-    $peserta->nama_peserta = $request->input('nama_peserta');
-    $peserta->partai_id = $request->input('partai_id');
-    $peserta->pendukung_calon_id = $request->input('pendukung_calon_id');
+        $peserta = Peserta::find($id);
+        $peserta->nama_peserta = $request->input('nama_peserta');
+        $peserta->tanggal_lahir = $request->input('tanggal_lahir');
+        $peserta->jenis_kelamin = $request->input('jenis_kelamin');
+        $peserta->alamat = $request->input('alamat');
+        // add more fields as needed
+        $peserta->save();
 
-    if ($request->hasFile('foto_peserta')) {
-        $file = $request->file('foto_peserta');
-        $file->storeAs('public/foto_peserta', $file->getClientOriginalName());
-        $peserta->foto_peserta = $file->getClientOriginalName();
+        return redirect()->route('pesertas.index')->with('success', 'Peserta updated successfully!');
     }
-
-    $peserta->save();
-
-    $eventId = $peserta->event_id;
-    $event = Event::find($eventId);
-    $pesertas = Peserta::where('event_id', $eventId)->get();
-
-    return redirect()->route('pesertas.index', $eventId)->with('success', 'Peserta edit successfully!');
-}
 
     /**
      * Remove the specified resource from storage.
@@ -139,11 +129,9 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    $peserta = Peserta::find($id);
-    $eventId = $peserta->event_id;
-    $peserta->delete();
-
-    return redirect()->route('pesertas.index', $eventId)->with('success', 'Peserta deleted successfully!');
-}
+    {
+        $peserta = Peserta::find($id);
+        $peserta->delete();
+        return redirect()->route('pesertas.index')->with('success', 'Peserta deleted successfully!');
+    }
 }

@@ -45,7 +45,7 @@
         </div>
       
         <div class="col-md-2">
-          <div class="mb-1 ml-3 mt-3">
+          <div class="mb-1 ml-1 mt-3">
             <a href="#" class="btn btn-success btn-sm w-10">
               Export Excel
             </a>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="">
-            <div class="mb-2 mt-3 ml-4">
+            <div class="mb-1 mt-3">
               <a href="#" class="btn btn-primary btn-sm w-10">
                 Export
               </a>

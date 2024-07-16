@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SCANNER | Dashboard</title>
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -27,10 +28,15 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
+
   <!-- Preloader -->
-  
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="/dist/img/KPU.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -43,14 +49,49 @@
         <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+
       <li class="nav-item">
+<<<<<<< HEAD
           <a class="nav-link" href="{{ route('logout') }}" 
              onclick="event.preventDefault(); document.getElementById('logout-form').submit();" role="button">
               <i class="fas fa-sign-out-alt"></i>
           </a>
+=======
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal" data-backdrop="false" title="Logout">
+            <i class="fas fa-sign-out-alt"></i>
+          </a>
+
+        <!-- Logout Modal -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Konfirmasi Keluar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Apakah anda yakin ingin keluar?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <form id="logout-form" action="#" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-primary">Keluar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+>>>>>>> ee4d1443a3b50524134054ee5f515053378f3545
       </li>
+      <!-- Messages Dropdown Menu -->
+      <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
           <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
               <i class="fas fa-th-large"></i>
@@ -68,7 +109,6 @@
 
 
   {{-- Disini sidebar nya --}}
-  
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -76,8 +116,6 @@
   </aside>
   {{-- Disini dimulai Setiap content yg berbeda dibuah --}}
   <!-- Content Wrapper. Contains page content -->
-  
-  
 
 
   <div class="content-wrapper">
@@ -87,15 +125,6 @@
   {{-- Cuman Sampai disini be untuk isi konten per halaman --}}
 
 
-
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
-  </footer>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -103,6 +132,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
 <!-- jQuery -->
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -139,3 +169,4 @@
 <script src="/dist/js/pages/dashboard.js"></script>
 </body>
 </html>
+
