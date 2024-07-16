@@ -32,7 +32,7 @@
               <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Username</th>
                     <th>Email</th>
@@ -43,18 +43,23 @@
                 <tbody>
                   @foreach($users as $user)
                   <tr>
-                    <td>{{ $user->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->is_admin ? 'Admin' : 'Petugas' }}</td>
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        
+                        
+                        
                         <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display: inline;">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                         </form>
+                      
+                      
                       </td>
                   </tr>
                   @endforeach

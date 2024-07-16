@@ -134,13 +134,32 @@ class EventController extends Controller
      */
     public function destroy($id)
 {
+    // Temukan event berdasarkan ID
     $event = Event::findOrFail($id);
 
-    // Delete pendukung_calon records associated with the event
-    PendukungCalon::where('event_id', $id)->delete();
+    // Temukan semua pendukung_calon terkait dengan event ini
+    $pendukung_calons = PendukungCalon::where('event_id', $id)->get();
 
+    // Iterasi setiap pendukung_calon
+    foreach ($pendukung_calons as $pendukung_calon) {
+        // Temukan semua peserta terkait dengan pendukung_calon ini
+        $pesertas = Peserta::where('pendukung_calon_id', $pendukung_calon->id)->get();
+
+        // Hapus setiap peserta terkait
+        foreach ($pesertas as $peserta) {
+            $peserta->delete();
+        }
+
+        // Hapus pendukung_calon
+        $pendukung_calon->delete();
+    }
+
+    // Akhirnya, hapus event itu sendiri
     $event->delete();
 
     return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
 }
+
+
+
 }
