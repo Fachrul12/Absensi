@@ -19,11 +19,19 @@
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">     
       
     
-    <li class="nav-item menu-open">
+      <li class="nav-item menu-open">
         <a href="/dashboard" class="nav-link">
           <i class="nav-icon fas fa-home"></i>
           <p>
             Dashboard
+          </p>
+        </a>
+      </li>
+      <li class="nav-item menu-open">
+        <a href="/absensi" class="nav-link">
+          <i class="nav-icon fas fa-calendar"></i>
+          <p>
+            Absensi Acara
           </p>
         </a>
       </li>
@@ -61,6 +69,7 @@
           </p>
       </a>
     </li>
+    
     @endcan
     
       

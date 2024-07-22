@@ -20,4 +20,9 @@ class Event extends Model
     {
     return $this->hasMany(Peserta::class);
     }
+
+    public function pesertaHadir()
+    {
+        return $this->hasMany(PesertaHadir::class);
+    }
 }

@@ -9,7 +9,8 @@ use App\Http\Controllers\PartaiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-
+use App\Models\Peserta;
+use App\Http\Controllers\QRCodeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,36 +22,41 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+Route::get('/absensi', [AbsensiController::class, 'index'])->middleware('auth')->name('absensi.index');
+Route::get('/absensi/{id}', [AbsensiController::class, 'show'])->name('absensi.show')->middleware('auth');
+Route::get('/absensi/event/{id}', [AbsensiController::class, 'create'])->name('absensi.create')->middleware('auth');
+Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store')->middleware('auth');
 
 
 // Route Event Baru
 Route::resource('events', EventController::class)->middleware('admin');
-Route::get('/events/{id}', 'EventController@show')->name('events.show');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show')->middleware('admin');
 
-
+// QR Code
+Route::get('/generate-qr-code/{pesertaId}', [QRCodeController::class, 'generateQRCode']);
+Route::get('/peserta/{pesertaId}/qr-code', function ($pesertaId) {
+    $peserta = Peserta::findOrFail($pesertaId);
+    return view('qr-code', ['peserta' => $peserta]);
+})->middleware('auth');
 
 Route::resource('pesertas', PesertaController::class)->middleware('admin');
-Route::get('/pesertas/create/{eventId}', 'PesertaController@create')->name('pesertas.create')->middleware('admin');
-Route::get('/events/{eventId}', 'PesertaController@index')->name('pesertas.index');
+Route::get('/pesertas/create/{eventId}', [PesertaController::class, 'create'])->name('pesertas.create')->middleware('admin');
+Route::get('/events/{eventId}', [PesertaController::class, 'index'])->name('pesertas.index')->middleware('admin');
 
-Route::controller(PesertaController::class)->group(function () {
-    Route::get('/pesertas/create/{eventId}', 'create')->name('pesertas.create'); 
-});
-
-//Route Kategori
+// Route Kategori
 Route::resource('kategoris', KategoriController::class)->middleware('admin');
 
-//Route Partai
+// Route Partai
 Route::resource('partais', PartaiController::class)->middleware('admin');
 
-//Route Pengguna
+// Route Pengguna
 Route::resource('users', UserController::class)->middleware('admin');
 

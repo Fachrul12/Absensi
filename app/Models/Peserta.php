@@ -33,8 +33,19 @@ class Peserta extends Model
         return $this->belongsTo(PendukungCalon::class);
     }
 
-    public function hadirs()
+    public function pesertaHadir()
     {
         return $this->hasMany(PesertaHadir::class);
+    }
+
+    public function kehadiran()
+    {
+        return $this->hasMany(PesertaHadir::class);
+    }
+
+    public function getStatusHadirAttribute()
+    {
+        $hadir = $this->kehadiran()->whereNotNull('tanggal_hadir')->exists();
+        return $hadir ? 'Hadir' : 'Belum Hadir';
     }
 }

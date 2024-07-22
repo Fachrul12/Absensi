@@ -49,15 +49,38 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->is_admin ? 'Admin' : 'Petugas' }}</td>
                     <td>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>                   
+                          <div class="modal fade" id="deleteModal-{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                  <div class="modal-body">
+                                    Apakah anda yakin ingin menghapus pengguna ini?
+                                  </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                      <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal-{{ $user->id }}">Hapus</button>
                         
                         
-                        
-                        <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display: inline;">
+                        {{-- <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display: inline;">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                        </form>
+                        </form> --}}
                       
                       
                       </td>

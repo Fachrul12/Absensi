@@ -17,7 +17,7 @@ class CreatePesertaHadirsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('peserta_id');
             $table->unsignedBigInteger('event_id');
-            $table->date('tanggal_hadir');
+            $table->date('tanggal_hadir')->nullable()->change();
             $table->timestamps();
 
             $table->foreign('peserta_id')->references('id')->on('pesertas');

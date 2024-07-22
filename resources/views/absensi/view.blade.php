@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-10">
-          <h1 class="m-0">Event | {{ $event->nama_event }}</h1>
+          <h1 class="m-0">Absensi Event | {{ $event->nama_event }}</h1>
         </div><!-- /.col -->
         <div class="col-sm-2">
           <ol class="breadcrumb float-sm-right">
@@ -20,16 +20,7 @@
     <hr class="m-0">
   </div>
 
-  {{-- Button diatas table --}}
-    <div class="col-md-2">
-      <div class=" ml-2 mt-3">
-        <a href="/pesertas/create/{{ $event->id }}" class="btn btn-success btn-sm w-100">
-          Tambah <i class="fas fa-plus"></i>
-        </a>
-      </div>
-    </div>
-  
-    
+  {{-- Button diatas table --}}    
     <div class="row">
         <div class="col-md-3">
           <div class="mb-2 ml-3 mt-3">
@@ -42,33 +33,17 @@
               </div>
             </div>
           </div>
-        </div>
-      
-        <div class="col-md-2">
-          <div class="mb-1 ml-1 mt-3">
-            <a href="#" class="btn btn-success btn-sm w-10">
-              Export Excel
-            </a>
-          </div>
-        </div>
-
-        <div class="">
-            <div class="mb-1 mt-3">
-              <a href="#" class="btn btn-primary btn-sm w-10">
-                Export
-              </a>
-            </div>
-          </div>
+        </div>              
     </div>
-
-
-
-
 
 <div class="card ml-3 mr-3">
     <div class="card-header">
-      <h3 class="card-title">List Peserta</h3>      
-    </div>
+        <h3 class="card-title">List Peserta</h3>
+        <a class="btn btn-success btn-sm float-right" href="{{ route('absensi.create', $event->id) }}">
+            <i class="fas fa-check-square"></i>
+            Absensi
+        </a>
+      </div>
     <!-- /.card-header -->
 
     <div class="card-body p-0">
@@ -81,7 +56,7 @@
             <th>Nama</th>
             <th>Partai</th>
             <th>Pendukung Calon</th>
-            <th style="width: 19%"></th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -92,28 +67,15 @@
               <img src="{{ asset('storage/foto_peserta/'. $peserta->foto_peserta) }}" alt="Avatar" width="30" height="30" class="img-fluid rounded">
             </td>
             <td>{{ $peserta->nama_peserta }}</td>
-            <td>{{ $peserta->partai->nama_partai}}</td>
-            <td>{{ $peserta->pendukungCalon->nama_calon}}</td>
-            <td class="project-actions text-right">
-              <div class="btn-group">
-                <a class="btn btn-primary btn-sm" href="{{ url('/generate-qr-code/'.$peserta->id) }}">
-                  <i class="fas fa-folder"></i>
-                  View
-              </a>  
-                  <a class="btn btn-info btn-sm" href="{{ route('pesertas.edit', $peserta->id) }}">
-                      <i class="fas fa-pencil-alt"></i>
-                      Edit
-                  </a>
-                  <form action="{{ route('pesertas.destroy', $peserta->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm">
-                          <i class="fas fa-trash"></i>
-                          Delete
-                      </button>
-                  </form>
-              </div>
-          </td>
+            <td>{{ $peserta->partai->nama_partai }}</td>
+            <td>{{ $peserta->pendukungCalon->nama_calon }}</td>
+            <td>
+              @if($peserta->status_hadir === 'Hadir')               
+                <span class="badge badge-success">{{ $peserta->status_hadir }}</span>
+              @else
+                <span class="badge badge-danger">{{ $peserta->status_hadir }}</span>
+              @endif
+            </td>
           </tr>
           @endforeach
         </tbody>

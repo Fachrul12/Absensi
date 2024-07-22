@@ -29,7 +29,7 @@
             <video id="preview"></video>
 
             <!-- Form -->
-            <form action="{{ route('store') }}" method="POST" id="form">
+            <form action="{{ route('absensi.store') }}" method="POST" id="form">
                 @csrf
                 <input type="hidden" name="peserta_id" id="peserta_id">
                 <input type="hidden" name="event_id" id="event_id">
@@ -47,7 +47,7 @@
                     <tr>
                         {{-- <td><img src="{{ $item->peserta->nama_peserta }}" alt="Foto" width="50"></td> --}}
                         <td>{{ $item->peserta->nama_peserta }}</td>
-                        <td>{{ $item->tanggal }}</td>
+                        <td>{{ $item->tanggal_hadir }}</td>
                     </tr>
                 @endforeach
             </table>
