@@ -27,11 +27,13 @@ class AbsensiController extends Controller
 
     PesertaHadir::create($validatedData);
 
-    // Set flash message
-    session()->flash('success', 'Peserta hadir berhasil dicatat.');
+    $peserta = Peserta::find($request->peserta_id);
 
-    // Redirect back to the same page
-    return back();
+    // Set flash message
+    return redirect()->back()->with([
+        'success' => 'Peserta berhasil diabsen!',
+        'peserta' => $peserta,
+    ]);
 }
 
 

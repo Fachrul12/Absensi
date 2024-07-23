@@ -41,7 +41,7 @@ Route::resource('events', EventController::class)->middleware('admin');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show')->middleware('admin');
 
 // QR Code
-Route::get('/generate-qr-code/{pesertaId}', [QRCodeController::class, 'generateQRCode']);
+Route::get('/generate-qr-code/{pesertaId}', [QRCodeController::class, 'generateQRCode'])->middleware('admin');
 Route::get('/peserta/{pesertaId}/qr-code', function ($pesertaId) {
     $peserta = Peserta::findOrFail($pesertaId);
     return view('qr-code', ['peserta' => $peserta]);

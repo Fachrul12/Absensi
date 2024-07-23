@@ -14,7 +14,9 @@ class QRCodeController extends Controller
         $peserta = Peserta::findOrFail($pesertaId);
         $data = [
             'id' => $peserta->id,
-            'event_id' => $peserta->event_id
+            'event_id' => $peserta->event_id,
+            'nama' => $peserta->nama_peserta,
+            'foto' => $peserta->foto_peserta
         ];
 
         // Konversi data menjadi format JSON atau string

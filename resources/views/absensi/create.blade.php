@@ -5,52 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Absensi Scan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .offset-lg-1 {
+            margin-left: 8.333333%;
+        }
+        .float-right {
+            float: right;
+        }
+    </style>
 </head>
 <body>
-    <div class="container col-lg-4 py-5">
-        <!-- Scanner -->
-        <div class="card bg-white shadow rounded-3 p-3 border-0">
-            <!-- Pesan -->
-            @if (session()->has('gagal'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('gagal') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="container col-lg-10 offset-lg-1 py-5">
+        <a href="{{ route('absensi.show', $event->id) }}" class="btn btn-secondary mb-3 float-left">Kembali</a>
+        <div class="row">
+            <!-- Scanner -->
+            <div class="col-lg-6">
+                <div class="card bg-white shadow rounded-3 p-3 border-0">
+                    <!-- Pesan -->
+                    @if (session()->has('gagal'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('gagal') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session()->get('success') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <div class="scanner"></div>
+                    <video id="preview" class="w-100"></video>
+
+                    <!-- Form -->
+                    <form action="{{ route('absensi.store') }}" method="POST" id="form">
+                        @csrf
+                        <input type="hidden" name="peserta_id" id="peserta_id">
+                        <input type="hidden" name="event_id" id="event_id">
+                    </form>
                 </div>
-            @endif
+            </div>
 
-            @if (session()->has('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{ session()->get('success') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            <div class="scanner"></div>
-            <video id="preview"></video>
-
-            <!-- Form -->
-            <form action="{{ route('absensi.store') }}" method="POST" id="form">
-                @csrf
-                <input type="hidden" name="peserta_id" id="peserta_id">
-                <input type="hidden" name="event_id" id="event_id">
-            </form>
-        </div>
-        <!-- Scanner -->
-
-        <div class="table-responsive mt-5">
-            <table class="table table-bordered table-hover">
-                <tr>                    
-                    <th>Nama</th>
-                    <th>Tanggal</th>
-                </tr>
-                @foreach ($pesertaHadir as $item)
-                    <tr>
-                        {{-- <td><img src="{{ $item->peserta->nama_peserta }}" alt="Foto" width="50"></td> --}}
-                        <td>{{ $item->peserta->nama_peserta }}</td>
-                        <td>{{ $item->tanggal_hadir }}</td>
-                    </tr>
-                @endforeach
-            </table>
+            <!-- Tampilan Data Peserta -->
+            <div class="col-lg-4">
+                @if (session()->has('peserta'))
+                    <div class="card bg-light shadow rounded-3 p-3 border-0">
+                        <img src="{{ asset('storage/foto_peserta/' . session()->get('peserta')->foto_peserta) }}" alt="Foto Peserta" class="img-thumbnail mb-3">
+                        <h4>{{ session()->get('peserta')->nama_peserta }}</h4>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 
