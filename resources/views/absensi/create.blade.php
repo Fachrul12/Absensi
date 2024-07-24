@@ -40,7 +40,7 @@
                     <video id="preview" class="w-100"></video>
 
                     <!-- Form -->
-                    <form action="{{ route('absensi.store') }}" method="POST" id="form">
+                    <form action="{{ route('absensi.store', ['event' => $event->id]) }}" method="POST" id="form">
                         @csrf
                         <input type="hidden" name="peserta_id" id="peserta_id">
                         <input type="hidden" name="event_id" id="event_id">

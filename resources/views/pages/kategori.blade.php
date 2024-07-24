@@ -22,32 +22,28 @@
 
   {{-- Button diatas table --}}
     <div class="col-md-2">
-      <div class="mb-1 ml-2 mt-3">
+      <div class="mb-3 ml-2 mt-3">
         <a href="{{ route('kategoris.create') }}" class="btn btn-success btn-sm w-100">
           Tambah <i class="fas fa-plus"></i>
       </a>      
       </div>
     </div>
-  
-    
-    <div class="row">
-        <div class="col-md-3 mr-3">
-          <div class="mb-2 ml-3 mt-3">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Cari Kategori...">
-              <div class="input-group-append">
-                <button class="btn btn-primary btn-sm" type="button">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>    
-      </div>
+      
 
 <div class="card ml-3">
     <div class="card-header">
-      <h3 class="card-title">List Kategori</h3>      
+      <h3 class="card-title">List Kategori</h3>   
+      <div class="card-tools">
+        <div class="input-group input-group-sm" style="width: 150px;">
+          <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-default">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>   
     </div>
     <!-- /.card-header -->
 

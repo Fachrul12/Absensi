@@ -16,6 +16,14 @@
       </div>
     </div>
   </div>
+
+  <div class="col-md-2">
+    <div class="mb-3 ml-2 mt-3">
+        <a href="{{ route('users.create') }}" class="btn btn-success btn-sm w-35 ">
+            <i class="fas fa-plus"></i> Tambah Pengguna 
+        </a>        
+    </div>    
+</div>
   
   <div class="content">
     <div class="container-fluid">
@@ -23,10 +31,18 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Daftar Pengguna</h3>
+              <h3 class="card-title">Daftar Pengguna</h3>     
               <div class="card-tools">
-                <a href="{{ route('users.create') }}" class="btn btn-success btn-sm">Tambah Pengguna</a>
-              </div>
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+    
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>         
             </div>
             <div class="card-body">
               <table class="table table-bordered table-striped">

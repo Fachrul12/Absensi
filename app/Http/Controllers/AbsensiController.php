@@ -16,12 +16,25 @@ class AbsensiController extends Controller
         return view('pages.absensi', compact('events'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $event)
 {
     $validatedData = $request->validate([
         'peserta_id' => 'required|exists:pesertas,id',
         'event_id' => 'required|exists:events,id',
     ]);
+
+    if ($validatedData['event_id'] != $event) {
+        // Set flash message untuk kesalahan
+        return redirect()->back()->with('gagal', 'Peserta tidak ada didalam daftar');
+    }
+
+    $existingRecord = PesertaHadir::where('peserta_id', $validatedData['peserta_id'])
+                                  ->where('event_id', $validatedData['event_id'])
+                                  ->exists();
+
+    if ($existingRecord) {
+        return redirect()->back()->with('gagal', 'Peserta sudah absen');
+    }
 
     $validatedData['tanggal_hadir'] = now(); // Set the current timestamp
 

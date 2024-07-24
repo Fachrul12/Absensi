@@ -17,31 +17,30 @@
         </div>
         <hr class="m-0">
     </div>
-    <div class="row">
+    <div class="row"> 
         <div class="col-md-2">
-            <div class="ml-3 mt-3">
+            <div class="ml-3 mt-3 mb-3">
                 <a href="{{ route('events.create') }}" class="btn btn-success btn-sm w-100">
                     Tambah <i class="fas fa-plus"></i>
                 </a>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="mb-2 ml-3 mt-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari Event...">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>    
     </div>
 
     <div class="card ml-3 mr-3">
         <div class="card-header">
             <h3 class="card-title">List Acara</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
         </div>
         <div class="card-body p-0">
             <table class="table table-condensed table-striped">

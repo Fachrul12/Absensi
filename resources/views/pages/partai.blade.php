@@ -21,31 +21,32 @@
 </div>
 
 <!-- Button and Search Bar -->
-<div class="row mb-2 ml-2">
-    <div class="col-md-3">
+<div class="col-md-2">
+    <div class="mb-3 ml-2 mt-3">
         <a href="{{ route('partais.create') }}" class="btn btn-success btn-sm w-35 ">
             <i class="fas fa-plus"></i> Tambah 
         </a>
         <a href="#" class="btn btn-success btn-sm w-35 ">
             Export Excel
         </a>
-    </div>
-    <div class="ml-auto mr-3">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cari Partai...">
-            <div class="input-group-append">
-                <button class="btn btn-primary btn-sm" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+    </div>    
 </div>
 
 <!-- List Partai -->
 <div class="card ml-3">
     <div class="card-header">
         <h3 class="card-title">List Partai</h3>
+        <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-default">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
     </div>
     <div class="card-body p-0">
         <table class="table table-condensed table-striped">

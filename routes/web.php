@@ -33,7 +33,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 Route::get('/absensi', [AbsensiController::class, 'index'])->middleware('auth')->name('absensi.index');
 Route::get('/absensi/{id}', [AbsensiController::class, 'show'])->name('absensi.show')->middleware('auth');
 Route::get('/absensi/event/{id}', [AbsensiController::class, 'create'])->name('absensi.create')->middleware('auth');
-Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store')->middleware('auth');
+Route::post('/absensi/store/{event}', [AbsensiController::class, 'store'])->name('absensi.store')->middleware('auth');
 
 
 // Route Event Baru
