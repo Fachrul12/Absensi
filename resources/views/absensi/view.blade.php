@@ -53,9 +53,7 @@
           <tr>
             <th style="width: 10px">No</th>
             <th>Foto</th>
-            <th>Nama</th>
-            <th>Partai</th>
-            <th>Pendukung Calon</th>
+            <th>Nama</th>            
             <th>Status</th>
           </tr>
         </thead>
@@ -66,9 +64,7 @@
             <td>
               <img src="{{ asset('storage/foto_peserta/'. $peserta->foto_peserta) }}" alt="Avatar" width="30" height="30" class="img-fluid rounded">
             </td>
-            <td>{{ $peserta->nama_peserta }}</td>
-            <td>{{ $peserta->partai->nama_partai }}</td>
-            <td>{{ $peserta->pendukungCalon->nama_calon }}</td>
+            <td>{{ $peserta->nama_peserta }}</td>          
             <td>
               @if($peserta->status_hadir === 'Hadir')               
                 <span class="badge badge-success">{{ $peserta->status_hadir }}</span>

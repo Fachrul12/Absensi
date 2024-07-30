@@ -11,6 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Models\Peserta;
 use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\KategoriPesertaController;
+use App\Http\Controllers\IsiKategoriPesertaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +57,17 @@ Route::get('/events/{eventId}', [PesertaController::class, 'index'])->name('pese
 // Route Kategori
 Route::resource('kategoris', KategoriController::class)->middleware('admin');
 
-// Route Partai
-Route::resource('partais', PartaiController::class)->middleware('admin');
+// Ro
+
+Route::resource('kategoripesertas', KategoriPesertaController::class)->middleware('admin');
+Route::get('/kategoripesertas/{id}', [KategoriPesertaController::class, 'show'])->name('kategoripesertas.show')->middleware('admin');
+
+Route::resource('isikategoripesertas', IsiKategoriPesertaController::class)->middleware('admin');
+Route::get('/isikategoripesertas/create/{kategoripesertaId}', [IsiKategoriPesertaController::class, 'create'])->name('isikategoripesertas.create')->middleware('admin');
+Route::get('/kategoripesertas/{kategoripesertaId}', [IsiKategoriPesertaController::class, 'index'])->name('isikategoripesertas.index')->middleware('admin');
+Route::post('/kategoripesertas/{kategoripeserta}/isikategoripesertas', [IsiKategoriPesertaController::class, 'store'])->name('kategoripesertas.isikategoripesertas.store')->middleware('admin');
 
 // Route Pengguna
 Route::resource('users', UserController::class)->middleware('admin');
 
+Route::get('/get-isi-kategori/{kategoriId}', [PesertaController::class, 'getIsiKategori']);

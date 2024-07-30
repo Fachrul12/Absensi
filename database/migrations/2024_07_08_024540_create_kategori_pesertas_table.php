@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePartaisTable extends Migration
+class CreateKategoriPesertasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePartaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('partais', function (Blueprint $table) {
+        Schema::create('kategori_pesertas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_partai');
-            $table->string('bendera_partai');
+            $table->string('nama_kategori_peserta');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreatePartaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('partais');
+        Schema::dropIfExists('_kategori_peserta');
     }
 }

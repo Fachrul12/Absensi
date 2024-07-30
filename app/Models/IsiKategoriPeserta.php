@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PendukungCalon extends Model
+class IsiKategoriPeserta extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nama_calon',
-        'event_id',
+        'nama_isi_kategori_peserta',      
+        'kategori_peserta_id',   
     ];
-
-    public function event()
-    {
-        return $this->belongsTo(Event::class);
-    }
 
     public function pesertas()
     {
         return $this->hasMany(Peserta::class);
+    }
+    
+    public function kategoripesertas()
+    {
+        return $this->belongsTo(KategoriPeserta::class);
     }
 }

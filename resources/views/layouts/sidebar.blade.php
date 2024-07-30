@@ -46,10 +46,10 @@
       </a>
     </li>
     <li class="nav-item menu-open">
-      <a href="/partais" class="nav-link">
+      <a href="/kategoripesertas" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
           <p>
-            Partai
+            Kategori Peserta
           </p>
       </a>
     </li>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Kategori;
 use App\Models\Peserta;
-use App\Models\PendukungCalon;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -47,16 +46,6 @@ class EventController extends Controller
     $event->status = 0; // Set a default value for status
     $event->save(); // Save the event instance first
 
-    $pendukung_calon = $request->input('pendukung_calon');
-
-    foreach ($pendukung_calon as $calon) {
-        PendukungCalon::create([
-            'event_id' => $event->id, // Use the saved event ID
-            'nama_calon' => $calon,
-            // Add other columns as needed
-        ]);
-    }
-
     return redirect()->route('events.index');
 }
 
@@ -82,10 +71,9 @@ class EventController extends Controller
     public function edit($id)
 {
     $event = Event::findOrFail($id);
-    $kategoris = Kategori::all();
-    $pendukung_calon = PendukungCalon::where('event_id', $id)->get();
+    $kategoris = Kategori::all();    
 
-    return view('event.edit', compact('event', 'kategoris', 'pendukung_calon'));
+    return view('event.edit', compact('event', 'kategoris'));
 }
 
 
@@ -103,9 +91,7 @@ class EventController extends Controller
     $request->validate([
         'nama_event' => 'required|string',
         'kategori_id' => 'required|exists:kategoris,id',
-        'tanggal_acara' => 'required|date',
-        'pendukung_calon' => 'nullable|array',
-        'pendukung_calon.*' => 'nullable|string',
+        'tanggal_acara' => 'required|date',        
     ]);
 
     $event->nama_event = $request->input('nama_event');
@@ -114,14 +100,7 @@ class EventController extends Controller
 
     $event->save();
 
-    // Update pendukung_calon records
-    PendukungCalon::where('event_id', $id)->delete();
-    foreach ($request->input('pendukung_calon') as $calon) {
-        PendukungCalon::create([
-            'event_id' => $id,
-            'nama_calon' => $calon,
-        ]);
-    }
+    // Update pendukung_calon records    
 
     return redirect()->route('events.index')->with('success', 'Event updated successfully!');
 }
@@ -136,24 +115,8 @@ class EventController extends Controller
 {
     // Temukan event berdasarkan ID
     $event = Event::findOrFail($id);
-
-    // Temukan semua pendukung_calon terkait dengan event ini
-    $pendukung_calons = PendukungCalon::where('event_id', $id)->get();
-
-    // Iterasi setiap pendukung_calon
-    foreach ($pendukung_calons as $pendukung_calon) {
-        // Temukan semua peserta terkait dengan pendukung_calon ini
-        $pesertas = Peserta::where('pendukung_calon_id', $pendukung_calon->id)->get();
-
-        // Hapus setiap peserta terkait
-        foreach ($pesertas as $peserta) {
-            $peserta->delete();
-        }
-
-        // Hapus pendukung_calon
-        $pendukung_calon->delete();
-    }
-
+// Temukan semua pendukung_calon terkait dengan event ini    
+    
     // Akhirnya, hapus event itu sendiri
     $event->delete();
 

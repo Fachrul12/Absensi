@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peserta;
-use App\Models\Partai;
-use App\Models\PendukungCalon;
 use App\Models\Event;
-use App\Models\Kategori;
+use App\Models\KategoriPeserta;
+use App\Models\IsiKategoriPeserta;
 
 class PesertaController extends Controller
 {
@@ -29,12 +28,10 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-{
-    $partais = Partai::all();
-    $eventId = $request->route('eventId');
-    $pendukung_calons = PendukungCalon::where('event_id', $eventId)->get();
-
-    return view('peserta.create', compact('eventId', 'partais', 'pendukung_calons'));
+{    
+    $eventId = $request->route('eventId');    
+    $kategoriPesertas = KategoriPeserta::all();
+    return view('peserta.create', compact('eventId','kategoriPesertas'));
 }
 
     /**
@@ -51,9 +48,8 @@ class PesertaController extends Controller
     ]);
 
     $peserta = new Peserta();
-    $peserta->nama_peserta = $request->input('nama_peserta');
-    $peserta->partai_id = $request->input('partai_id');
-    $peserta->pendukung_calon_id = $request->input('pendukung_calon_id');
+    $peserta->nama_peserta = $request->input('nama_peserta'); 
+    $peserta->isi_kategori_peserta_id = $request->input('isi_kategori_peserta_id');   
 
     $file = $request->file('foto_peserta');
     $file->storeAs('public/foto_peserta', $file->getClientOriginalName());
@@ -90,12 +86,11 @@ class PesertaController extends Controller
      */
     public function edit($id)
 {
-    $peserta = Peserta::find($id);
-    $partais = Partai::all();    
-    $eventId = $peserta->event_id;
-    $pendukung_calons = PendukungCalon::where('event_id', $eventId)->get();
+    $peserta = Peserta::find($id);    
+    $kategoriPesertas = KategoriPeserta::all();   
+    $eventId = $peserta->event_id;    
 
-    return view('peserta.edit', compact('peserta', 'partais', 'pendukung_calons', 'eventId'));
+    return view('peserta.edit', compact('peserta','eventId','kategoriPesertas'));
 }
 
     /**
@@ -113,9 +108,9 @@ class PesertaController extends Controller
     ]);
 
     $peserta = Peserta::find($id);
-    $peserta->nama_peserta = $request->input('nama_peserta');
-    $peserta->partai_id = $request->input('partai_id');
-    $peserta->pendukung_calon_id = $request->input('pendukung_calon_id');
+    $peserta->nama_peserta = $request->input('nama_peserta');    
+    $peserta->isi_kategori_peserta_id = $request->input('isi_kategori_peserta_id');   
+
 
     if ($request->hasFile('foto_peserta')) {
         $file = $request->file('foto_peserta');
@@ -146,4 +141,11 @@ class PesertaController extends Controller
 
     return redirect()->route('pesertas.index', $eventId)->with('success', 'Peserta deleted successfully!');
 }
+
+public function getIsiKategori($kategoriId)
+{
+    $isiKategoriPesertas = IsiKategoriPeserta::where('kategori_peserta_id', $kategoriId)->get(['id', 'nama_isi_kategori_peserta']);
+    return response()->json($isiKategoriPesertas);
+}
+
 }

@@ -23,7 +23,7 @@
   {{-- Button diatas table --}}
     <div class="col-md-2">
       <div class=" ml-2 mt-3">
-        <a href="/pesertas/create/{{ $event->id }}" class="btn btn-success btn-sm w-100">
+        <a href="{{ route('pesertas.create', $event->id) }}" class="btn btn-success btn-sm w-100">
           Tambah <i class="fas fa-plus"></i>
         </a>
       </div>
@@ -78,7 +78,9 @@
           <tr>
             <th style="width: 10px">No</th>
             <th>Foto</th>
-            <th>Nama</th>                 
+            <th>Nama</th>
+            <th>Partai</th>
+            <th>Pendukung Calon</th>
             <th style="width: 19%"></th>
           </tr>
         </thead>
@@ -87,15 +89,17 @@
           <tr>
             <td>{{ $loop->iteration }}</td>
             <td>
-              <img src="{{ asset('storage/foto_peserta/avatar5.png') }}" alt="foto-peserta" width="30" height="30" class="img-fluid rounded">
+                <img src="{{ asset('dist/img/avatar.png') }}" alt="Avatar" width="30" height="30" class="img-fluid rounded">
             </td>
-            <td>{{ $peserta->nama_peserta }}</td>             
+            <td>{{ $peserta->nama_peserta }}</td>
+            <td>{{ $peserta->partai->nama_partai}}</td>
+            <td>{{ $peserta->pendukungCalon->nama_calon}}</td>
             <td class="project-actions text-right">
               <div class="btn-group">
-                <a class="btn btn-primary btn-sm" href="{{ url('/generate-qr-code/'.$peserta->id) }}">
-                  <i class="fas fa-folder"></i>
-                  View
-              </a>  
+                  <a class="btn btn-primary btn-sm" href="{{ route('pesertas.show', $peserta->id) }}">
+                      <i class="fas fa-folder"></i>
+                      View
+                  </a>
                   <a class="btn btn-info btn-sm" href="{{ route('pesertas.edit', $peserta->id) }}">
                       <i class="fas fa-pencil-alt"></i>
                       Edit

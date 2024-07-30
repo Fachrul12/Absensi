@@ -10,29 +10,22 @@ class Peserta extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_peserta',
-        'partai_id',
-        'pendukung_calon_id',
+        'nama_peserta',      
         'foto_peserta',
-        'event_id',
-        'qr_code',
+        'event_id',   
+        'kategori_peserta_id',
     ];
 
     public function event()
     {
         return $this->belongsTo(Event::class);
-    }
+    }    
 
-    public function partai()
+    public function IsiKategoriPeserta()
     {
-        return $this->belongsTo(Partai::class);
-    }
-
-    public function pendukungCalon()
-    {
-        return $this->belongsTo(PendukungCalon::class);
-    }
-
+        return $this->belongsTo(IsiKategoriPeserta::class);
+    }  
+    
     public function pesertaHadir()
     {
         return $this->hasMany(PesertaHadir::class);

@@ -16,16 +16,13 @@ class CreatePesertasTable extends Migration
     Schema::create('pesertas', function (Blueprint $table) {
         $table->id();
         $table->string('nama_peserta');
-        $table->unsignedBigInteger('partai_id');
-        $table->unsignedBigInteger('pendukung_calon_id');
         $table->string('foto_peserta')->nullable();
         $table->unsignedBigInteger('event_id')->nullable();
+        $table->unsignedBigInteger('isi_kategori_peserta_id')->nullable();
         $table->string('qr_code')->nullable();
-        $table->timestamps();
-
-        $table->foreign('partai_id')->references('id')->on('partais');
-        $table->foreign('pendukung_calon_id')->references('id')->on('pendukung_calons');
+        $table->timestamps();        
         $table->foreign('event_id')->references('id')->on('events');
+        $table->foreign('isi_kategori_peserta_id')->references('id')->on('isi_kategori_pesertas');
     });
 }
 

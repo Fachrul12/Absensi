@@ -54,18 +54,7 @@
                   </div>
               </div>
           </div>
-      </div>                        
-
-        <div class="form-group">
-          <label for="pendukung_calon">Pendukung Calon</label>
-          <div id="pendukung-calon-inputs">
-            <div class="input-group mb-2">
-              <input type="text" class="form-control" name="pendukung_calon[]" placeholder="Nama Pendukung Calon 1">
-              <button class="btn btn-danger remove-input" type="button">-</button>
-            </div>
-          </div>
-          <button class="btn btn-primary add-input" type="button">Tambah Pendukung Calon</button>
-        </div>
+      </div>                                
 
         <div class="form-group">
           <label for="tanggal_acara">Tanggal Acara</label>
