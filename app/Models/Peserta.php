@@ -13,7 +13,7 @@ class Peserta extends Model
         'nama_peserta',      
         'foto_peserta',
         'event_id',   
-        'kategori_peserta_id',
+        'isi_kategori_peserta_id',
     ];
 
     public function event()
@@ -23,7 +23,7 @@ class Peserta extends Model
 
     public function IsiKategoriPeserta()
     {
-        return $this->belongsTo(IsiKategoriPeserta::class);
+        return $this->belongsTo(IsiKategoriPeserta::class, 'isi_kategori_peserta_id');
     }  
     
     public function pesertaHadir()

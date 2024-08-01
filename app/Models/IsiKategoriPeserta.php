@@ -13,14 +13,10 @@ class IsiKategoriPeserta extends Model
         'nama_isi_kategori_peserta',      
         'kategori_peserta_id',   
     ];
-
-    public function pesertas()
-    {
-        return $this->hasMany(Peserta::class);
-    }
+   
     
-    public function kategoripesertas()
+    public function kategoriPeserta()
     {
-        return $this->belongsTo(KategoriPeserta::class);
+        return $this->belongsTo(KategoriPeserta::class, 'kategori_peserta_id');
     }
 }

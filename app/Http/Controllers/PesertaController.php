@@ -18,9 +18,19 @@ class PesertaController extends Controller
     public function index($eventId)
 {
     $event = Event::find($eventId);
-    $pesertas = Peserta::where('event_id', $eventId)->get();
+    if (!$event) {
+        return redirect()->back()->with('error', 'Event not found');
+    }
+
+    // Eager load nested relationships
+    $pesertas = Peserta::where('event_id', $eventId)
+                ->with('isiKategoriPeserta.kategoriPeserta') 
+                ->get();
+
     return view('event.view', compact('event', 'pesertas'));
 }
+
+
 
     /**
      * Show the form for creating a new resource.

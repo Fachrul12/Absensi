@@ -16,7 +16,7 @@ class KategoriPeserta extends Model
 
     public function isikategoripesertas()
     {
-        return $this->hasMany(IsiKategoriPeserta::class,  'kategori_peserta_id');
+        return $this->hasMany(IsiKategoriPeserta::class);
     }
 
 }
