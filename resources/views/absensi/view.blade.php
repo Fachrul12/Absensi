@@ -7,12 +7,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-10">
-          <h1 class="m-0">Absensi Event | {{ $event->nama_event }}</h1>
+          <h1 class="m-0">Absensi Acara | {{ $event->nama_event }}</h1>
         </div><!-- /.col -->
         <div class="col-sm-2">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Event</li>
+            <li class="breadcrumb-item active">Absensi Acara</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->

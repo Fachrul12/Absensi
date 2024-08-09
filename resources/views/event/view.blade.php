@@ -6,13 +6,14 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1 class="m-0">Event | {{ $event->nama_event }}</h1>
+            <div class="col-sm-9">
+                <h1 class="m-0">Acara | {{ $event->nama_event }}</h1>
             </div><!-- /.col -->
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Event</li>
+                    <li class="breadcrumb-item"><a href="/events">List Peserta</a></li>
+                    <li class="breadcrumb-item active">Daftar Peserta</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,17 +47,18 @@
 
     <div class="col-md-2">
         <div class="mb-1 ml-1 mt-3">
-            <a href="#" class="btn btn-success btn-sm w-10">
-                Export Excel
+            <a href="/import-peserta/{{ $event->id  }}" class="btn btn-success btn-sm w-10">
+                Import Excel
             </a>
         </div>
     </div>
 
     <div class="">
         <div class="mb-1 mt-3">
-            <a href="#" class="btn btn-primary btn-sm w-10">
-                Export
+            <a href="{{ route('export.pesertas') }}" class="btn btn-success btn-sm w-10">
+                Export Excel
             </a>
+            
         </div>
     </div>
 </div>

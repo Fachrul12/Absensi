@@ -23,12 +23,9 @@
 <!-- Button and Search Bar -->
 <div class="col-md-2">
     <div class="mb-3 ml-2 mt-3">
-        <a href="{{ route('kategoripesertas.create') }}" class="btn btn-success btn-sm w-35 ">
+        <a href="{{ route('kategoripesertas.create') }}" class="btn btn-success btn-sm w-100">
             <i class="fas fa-plus"></i> Tambah 
-        </a>
-        <a href="#" class="btn btn-success btn-sm w-35 ">
-            Export Excel
-        </a>
+        </a>        
     </div>    
 </div>
 

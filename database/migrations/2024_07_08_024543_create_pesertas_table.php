@@ -21,7 +21,7 @@ class CreatePesertasTable extends Migration
         $table->unsignedBigInteger('isi_kategori_peserta_id')->nullable();
         $table->string('qr_code')->nullable();
         $table->timestamps();        
-        $table->foreign('event_id')->references('id')->on('events');
+        $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         $table->foreign('isi_kategori_peserta_id')->references('id')->on('isi_kategori_pesertas');
     });
 }

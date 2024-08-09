@@ -58,7 +58,7 @@ class EventController extends Controller
     public function show($id)
 {
     $event = Event::find($id);
-    $pesertas = Peserta::where('event_id', $id)->get();
+    $pesertas = Peserta::where('event_id', $id)->with('kehadiran')->get();
     return view('event.view', compact('event', 'pesertas'));
 }
 

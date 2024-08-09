@@ -63,7 +63,7 @@
                   <td>{{ $kategori->nama_kategori }}</td>
                   <td class="project-actions text-right">
                     <div class="btn-group">
-                          <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('kategoris.edit', $kategori->id) }}">
+                          <a class="btn btn-info btn-sm d-inline mr-1" href="{{ route('kategoris.edit', $kategori->id) }}">
                               <i class="fas fa-pencil-alt"></i>
                               Edit
                           </a>

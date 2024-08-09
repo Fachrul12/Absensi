@@ -124,8 +124,8 @@
                   <label for="is_admin">Role</label>
                   <div class="input-group">
                     <select class="form-control" id="is_admin" name="is_admin">
-                      <option value="0">User</option>
-                      <option value="1">Admin</option>
+                      <option value="0">Petugas</option>
+                      <option value="1">Administrator</option>
                     </select>
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="fas fa-user-tag"></i></span>

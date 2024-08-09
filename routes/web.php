@@ -13,6 +13,11 @@ use App\Models\Peserta;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\KategoriPesertaController;
 use App\Http\Controllers\IsiKategoriPesertaController;
+use App\Exports\PesertaExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+
+
 
 
 /*
@@ -54,6 +59,11 @@ Route::resource('pesertas', PesertaController::class)->middleware('admin');
 Route::get('/pesertas/create/{eventId}', [PesertaController::class, 'create'])->name('pesertas.create')->middleware('admin');
 Route::get('/events/{eventId}', [PesertaController::class, 'index'])->name('pesertas.index')->middleware('admin');
 
+Route::get('export-pesertas', function () {
+    return Excel::download(new PesertaExport, 'pesertas.xlsx');
+})->name('export.pesertas');
+
+
 // Route Kategori
 Route::resource('kategoris', KategoriController::class)->middleware('admin');
 
@@ -71,3 +81,6 @@ Route::post('/kategoripesertas/{kategoripeserta}/isikategoripesertas', [IsiKateg
 Route::resource('users', UserController::class)->middleware('admin');
 
 Route::get('/get-isi-kategori/{kategoriId}', [PesertaController::class, 'getIsiKategori']);
+
+Route::get('/import-peserta/{event_id}', [PesertaController::class, 'showImportForm'])->name('import.pesertas');
+Route::post('/import-peserta/{event_id}', [PesertaController::class, 'import'])->name('import.peserta');

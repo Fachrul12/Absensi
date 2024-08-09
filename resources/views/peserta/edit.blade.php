@@ -3,17 +3,17 @@
 @section('content')
 <div class="content-header">
     <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0">Edit Peserta</h1>
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Edit Peserta</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="/event">Event</a></li>
+                </ol>
+            </div>
         </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item active"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active"><a href="/event">Event</a></li>
-          </ol>
-        </div>
-      </div>
     </div>
     <hr class="m-0">
 </div>
@@ -35,7 +35,7 @@
                 <select class="form-control" id="kategori_peserta" name="kategori_peserta">
                     <option value="">Pilih Kategori</option>
                     @foreach($kategoriPesertas as $kategori)
-                        <option value="{{ $kategori->id }}" {{ $peserta->kategori_peserta_id == $kategori->id ? 'selected' : '' }}>
+                        <option value="{{ $kategori->id }}" {{ $peserta->kategori_peserta == $kategori->id ? 'selected' : '' }}>
                             {{ $kategori->nama_kategori_peserta }}
                         </option>
                     @endforeach
@@ -53,7 +53,7 @@
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="foto_peserta" name="foto_peserta">
-                        <label class="custom-file-label" for="foto_peserta" id="file-label">
+                        <label class="custom-file-label" for="foto_peserta">
                             {{ $peserta->foto_peserta ? 'Change file' : 'Choose file' }}
                         </label>
                     </div>
@@ -74,14 +74,12 @@
 </div>
 
 <script>
-    document.getElementById('kategori_peserta').addEventListener('change', function() {
-        var kategoriId = this.value;
-        var isiKategoriSelect = document.getElementById('isi_kategori_peserta_id');
+    document.addEventListener('DOMContentLoaded', function() {
+    var kategoriSelect = document.getElementById('kategori_peserta');
+    var isiKategoriSelect = document.getElementById('isi_kategori_peserta_id');
 
-        // Clear existing options
+    function populateIsiKategori(kategoriId) {
         isiKategoriSelect.innerHTML = '<option value="">Pilih Isi Kategori</option>';
-
-        // Fetch the corresponding Isi Kategori Peserta based on kategoriId
         if (kategoriId) {
             fetch(`/get-isi-kategori/${kategoriId}`)
             .then(response => response.json())
@@ -94,24 +92,25 @@
                 });
 
                 // Pre-select the current isi_kategori_peserta if it's already set
-                if ('{{ $peserta->isi_kategori_peserta_id }}') {
-                    isiKategoriSelect.value = '{{ $peserta->isi_kategori_peserta }}';
+                if ({{ $peserta->isi_kategori_peserta_id }}) {
+                    isiKategoriSelect.value = '{{ $peserta->isi_kategori_peserta_id }}';
                 }
             })
             .catch(error => console.error('Error fetching data:', error));
         } else {
-            // If no category is selected, clear the isi_kategori_peserta options
             isiKategoriSelect.innerHTML = '<option value="">Pilih Isi Kategori</option>';
         }
-    });
+    }
 
-    // Trigger change event on page load to populate isi_kategori_peserta
-    document.addEventListener('DOMContentLoaded', function() {
-        var kategoriId = document.getElementById('kategori_peserta').value;
-        if (kategoriId) {
-            var event = new Event('change');
-            document.getElementById('kategori_peserta').dispatchEvent(event);
-        }
+    // Pre-select the current kategori_peserta and populate isi_kategori_peserta
+    if (kategoriSelect.value) {
+        populateIsiKategori(kategoriSelect.value);
+    }
+
+    kategoriSelect.addEventListener('change', function() {
+        populateIsiKategori(this.value);
     });
+});
+
 </script>
 @endsection

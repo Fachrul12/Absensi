@@ -20,7 +20,7 @@ class CreatePesertaHadirsTable extends Migration
             $table->date('tanggal_hadir')->nullable();
             $table->timestamps();
 
-            $table->foreign('peserta_id')->references('id')->on('pesertas');
+            $table->foreign('peserta_id')->references('id')->on('pesertas')->onDelete('cascade');
             $table->foreign('event_id')->references('id')->on('events');
         });
     }
