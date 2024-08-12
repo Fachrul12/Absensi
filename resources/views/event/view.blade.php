@@ -98,10 +98,10 @@
                     </td>               
                     <td class="project-actions text-right">
                         <div class="btn-group">
-                            <a class="btn btn-primary btn-sm" href="{{ url('/generate-qr-code/'.$peserta->id) }}">
-                                <i class="fas fa-folder"></i>
-                                View
-                            </a>  
+                            <a class="btn btn-primary btn-sm btn-qr" href="{{ url('/generate-qr-code/'.$peserta->id) }}">
+                                <i class="fas fa-qrcode"></i> QRCode
+                            </a>
+                              
                             <a class="btn btn-info btn-sm" href="{{ route('pesertas.edit', $peserta->id) }}">
                                 <i class="fas fa-pencil-alt"></i>
                                 Edit

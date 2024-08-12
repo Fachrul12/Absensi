@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Peserta;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\PesertaHadir;
+use Illuminate\Support\Facades\Storage;
 
 class QRCodeController extends Controller
 {
@@ -22,11 +23,17 @@ class QRCodeController extends Controller
         // Konversi data menjadi format JSON atau string
         $dataString = json_encode($data);
 
-        // Hasilkan QR code
-        $qrCode = QrCode::format('svg')->size(200)->generate($dataString);
+        // Hasilkan QR code dalam format PNG
+        $qrCode = QrCode::format('png')->size(200)->generate($dataString);
 
-        // Kembalikan QR code sebagai gambar atau simpan di server
-        return response($qrCode, 200)->header('Content-Type', 'image/svg+xml');
+        // Nama file untuk disimpan
+        $fileName = 'qrcode_'.$peserta->nama_peserta.'.png';
+
+        // Simpan file QR code di dalam storage
+        Storage::put('public/qrcodes/'.$fileName, $qrCode);
+
+        // Berikan response untuk mengunduh file gambar PNG
+        return response()->download(storage_path('app/public/qrcodes/'.$fileName))->deleteFileAfterSend(true);
     }
 
     public function store(Request $request)
