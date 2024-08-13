@@ -14,6 +14,7 @@ use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\KategoriPesertaController;
 use App\Http\Controllers\IsiKategoriPesertaController;
 use App\Exports\PesertaExport;
+use App\Http\Controllers\BackgroundController;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -50,10 +51,14 @@ Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show'
 
 // QR Code
 Route::get('/generate-qr-code/{pesertaId}', [QRCodeController::class, 'generateQRCode'])->middleware('admin');
+
 Route::get('/peserta/{pesertaId}/qr-code', function ($pesertaId) {
     $peserta = Peserta::findOrFail($pesertaId);
     return view('qr-code', ['peserta' => $peserta]);
 })->middleware('auth');
+
+Route::get('/qrcode/download-without-background/{pesertaId}', [QRCodeController::class, 'downloadWithoutBackground'])->name('qrcode.download_without_background');
+
 
 Route::resource('pesertas', PesertaController::class)->middleware('admin');
 Route::get('/pesertas/create/{eventId}', [PesertaController::class, 'create'])->name('pesertas.create')->middleware('admin');
@@ -84,3 +89,9 @@ Route::get('/get-isi-kategori/{kategoriId}', [PesertaController::class, 'getIsiK
 
 Route::get('/import-peserta/{event_id}', [PesertaController::class, 'showImportForm'])->name('import.pesertas');
 Route::post('/import-peserta/{event_id}', [PesertaController::class, 'import'])->name('import.peserta');
+
+Route::resource('background', BackgroundController::class)->middleware('admin');
+Route::get('backgrounds/assign/{background_id}/{event_id}', [BackgroundController::class, 'assign'])->name('background.assign');
+Route::post('/backgrounds/{background}/assign-multiple', [BackgroundController::class, 'assignMultiple'])->name('background.assignMultiple');
+
+Route::get('/qrcode/download/{pesertaId}/without-background', [QRCodeController::class, 'downloadWithoutBackground'])->name('qrcode.download.without.background');

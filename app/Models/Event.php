@@ -25,4 +25,10 @@ class Event extends Model
     {
         return $this->hasMany(PesertaHadir::class);
     }
+
+    public function background()
+{
+    return $this->belongsTo(Background::class);
+}
+
 }

@@ -19,58 +19,58 @@
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">     
       
     
-      <li class="nav-item menu-open">
-        <a href="/dashboard" class="nav-link">
+    <li class="nav-item {{ Request::is('dashboard*') ? 'menu-open' : '' }}">
+      <a href="/dashboard" class="nav-link">
           <i class="nav-icon fas fa-home"></i>
-          <p>
-            Dashboard
-          </p>
-        </a>
-      </li>
-      <li class="nav-item menu-open">
-        <a href="/absensi" class="nav-link">
+          <p>Dashboard</p>
+      </a>
+  </li>
+  
+  <li class="nav-item {{ Request::is('absensi*') ? 'menu-open' : '' }}">
+      <a href="/absensi" class="nav-link">
           <i class="nav-icon fas fa-calendar"></i>
-          <p>
-            Absensi Acara
-          </p>
-        </a>
-      </li>
-    @can('admin')
-    <li class="nav-header">ADMINISTRATOR</li>
-    <li class="nav-item menu-open">
+          <p>Absensi Acara</p>
+      </a>
+  </li>
+  
+  @can('admin')
+  <li class="nav-header">ADMINISTRATOR</li>
+  <li class="nav-item {{ Request::is('events*') ? 'menu-open' : '' }}">
       <a href="/events" class="nav-link">
-        <i class="nav-icon fas fa-calendar"></i>
-        <p>
-          Acara
-        </p>
+          <i class="nav-icon fas fa-calendar"></i>
+          <p>Acara</p>
       </a>
-    </li>
-    <li class="nav-item menu-open">
+  </li>
+  
+  <li class="nav-item {{ Request::is('kategoripesertas*') ? 'menu-open' : '' }}">
       <a href="/kategoripesertas" class="nav-link">
-        <i class="nav-icon fas fa-users"></i>
-          <p>
-            Kategori Peserta
-          </p>
+          <i class="nav-icon fas fa-users"></i>
+          <p>Kategori Peserta</p>
       </a>
-    </li>
-    <li class="nav-item menu-open">
+  </li>
+  
+  <li class="nav-item {{ Request::is('kategoris*') ? 'menu-open' : '' }}">
       <a href="/kategoris" class="nav-link">
-        <i class="nav-icon fas fa-tags"></i>
-          <p>
-            Kategori
-          </p>
+          <i class="nav-icon fas fa-tags"></i>
+          <p>Kategori</p>
       </a>
-    </li>
-    <li class="nav-item menu-open">
+  </li>
+  
+  <li class="nav-item {{ Request::is('background*') ? 'menu-open' : '' }}">
+      <a href="/background" class="nav-link">
+          <i class="nav-icon fas fa-image"></i>
+          <p>Manage Backgrounds</p>
+      </a>
+  </li>
+  
+  <li class="nav-item {{ Request::is('users*') ? 'menu-open' : '' }}">
       <a href="/users" class="nav-link">
-        <i class="nav-icon fas fa-user"></i>
-          <p>
-            Pengguna
-          </p>
+          <i class="nav-icon fas fa-user"></i>
+          <p>Pengguna</p>
       </a>
-    </li>
-    
-    @endcan
+  </li>
+  @endcan
+  
     
       
   </ul>
