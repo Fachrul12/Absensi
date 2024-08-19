@@ -95,3 +95,21 @@ Route::get('backgrounds/assign/{background_id}/{event_id}', [BackgroundControlle
 Route::post('/backgrounds/{background}/assign-multiple', [BackgroundController::class, 'assignMultiple'])->name('background.assignMultiple');
 
 Route::get('/qrcode/download/{pesertaId}/without-background', [QRCodeController::class, 'downloadWithoutBackground'])->name('qrcode.download.without.background');
+
+// Route to preview the QR code with the background
+Route::get('/backgrounds/{background}/preview', [QRCodeController::class, 'preview'])->name('background.preview');
+
+// Route to update the preview with the new size and position
+Route::post('/backgrounds/{background}/update-preview', [QRCodeController::class, 'updatePreview'])->name('background.updatePreview');
+
+// Route to download the QR code with the background
+Route::get('/peserta/{peserta}/download-with-background', [QRCodeController::class, 'downloadWithBackground'])->name('peserta.downloadWithBackground');
+
+// Route to handle saving QR code settings
+// web.php
+// web.php
+Route::get('/preview/{backgroundId}', [QRCodeController::class, 'showPreview'])->name('preview.page');
+
+
+Route::post('/save-preview', [QRCodeController::class, 'savePreview'])->name('save.preview');
+

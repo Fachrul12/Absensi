@@ -38,6 +38,7 @@
                     <th>Assign ke Event</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Preview</th> <!-- Tambahkan kolom baru untuk tombol preview -->
                 </tr>
             </thead>
             <tbody>
@@ -53,15 +54,15 @@
                                 <form action="{{ route('background.assignMultiple', $background->id) }}" method="POST">
                                     @csrf
                                     @foreach($events as $event)
-                                        <div class="form-check">
+                                        <div class="form-check ml-2">
                                             <input class="form-check-input" type="checkbox" name="events[]" value="{{ $event->id }}" id="event{{ $event->id }}" 
                                                 @if($background->events->contains($event->id)) checked @endif>
-                                            <label class="form-check-label" for="event{{ $event->id }}">
+                                            <label class="form-check-label ml-1" for="event{{ $event->id }}">
                                                 {{ $event->nama_event }}
                                             </label>
                                         </div>
                                     @endforeach
-                                    <button type="submit" class="btn btn-primary btn-sm mt-2">Assign</button>
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2 ml-2">Assign</button>
                                 </form>
                             </div>
                         </div>
@@ -73,6 +74,10 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
+                    </td>
+                    <td>
+                        <!-- Tombol untuk menuju halaman preview -->
+                        <a href="{{ route('background.preview', $background->id) }}" class="btn btn-primary btn-sm">Preview</a>
                     </td>
                 </tr>
                 @endforeach
