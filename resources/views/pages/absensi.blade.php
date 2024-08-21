@@ -16,25 +16,20 @@
             </div>
         </div>
         <hr class="m-0">
-    </div>
-    <div class="row">        
-        <div class="col-md-3">
-            <div class="mb-2 ml-3 mt-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari Event...">
+    </div>   
+    <div class="card ml-3 mr-3">
+        <div class="card-header text-white"" style="background-color: #4a525a ;">
+            <h3 class="card-title">List Acara</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
                     <div class="input-group-append">
-                        <button class="btn btn-primary btn-sm" type="button">
+                        <button type="submit" class="btn btn-default">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="card ml-3 mr-3">
-        <div class="card-header">
-            <h3 class="card-title">List Acara</h3>
         </div>
         <div class="card-body p-0">
             <table class="table table-condensed table-striped">
@@ -44,7 +39,18 @@
                         <th>Nama Event</th>
                         <th>Peserta</th>
                         <th>Tanggal Acara</th>
-                        <th>Status Acara</th>
+                        <th style="cursor: pointer;">
+                            <a href="{{ route('absensi.index', ['sort' => 'status', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">
+                                Status Acara 
+                                @if(request('sort') == 'status' && request('direction') == 'asc')
+                                    <i class="fas fa-sort-up"></i>
+                                @elseif(request('sort') == 'status' && request('direction') == 'desc')
+                                    <i class="fas fa-sort-down"></i>
+                                @else
+                                    <i class="fas fa-sort"></i>
+                                @endif
+                            </a>
+                        </th>
                         <th style="width: 30%"></th>
                     </tr>
                 </thead>

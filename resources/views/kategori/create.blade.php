@@ -21,7 +21,7 @@
   </div>
 
   <div class="card ml-3 mr-3">
-    <div class="card-header">
+    <div class="card-header text-white"" style="background-color: #4a525a ;">
       <h3 class="card-title">Form Tambah kategori</h3>      
     </div>
     <!-- /.card-header -->

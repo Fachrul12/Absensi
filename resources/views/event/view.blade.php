@@ -21,29 +21,28 @@
     <hr class="m-0">
 </div>
 
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
 {{-- Button diatas table --}}
+<div class="row">    
+
 <div class="col-md-2">
-    <div class=" ml-2 mt-3">
+    <div class=" ml-3 mt-3">
         <a href="/pesertas/create/{{ $event->id }}" class="btn btn-success btn-sm w-100">
             Tambah <i class="fas fa-plus"></i>
         </a>
     </div>
 </div>
-
-
-<div class="row">
-    <div class="col-md-3">
-        <div class="mb-2 ml-3 mt-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Cari Event...">
-                <div class="input-group-append">
-                    <button class="btn btn-primary btn-sm" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="col-md-2">
         <div class="mb-1 ml-1 mt-3">
@@ -65,8 +64,18 @@
 
 
 <div class="card ml-3 mr-3">
-    <div class="card-header">
-        <h3 class="card-title">List Peserta</h3>      
+    <div class="card-header text-white"" style="background-color: #4a525a ;">
+        <h3 class="card-title">List Peserta</h3>
+        <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>      
     </div>
     <!-- /.card-header -->
 
@@ -102,7 +111,7 @@
                                 <i class="fas fa-qrcode"></i> QRCode
                             </a>
                               
-                            <a class="btn btn-info btn-sm" href="{{ route('pesertas.edit', $peserta->id) }}">
+                            <a class="btn btn-info btn-sm ml-1 mr-1" href="{{ route('pesertas.edit', $peserta->id) }}">
                                 <i class="fas fa-pencil-alt"></i>
                                 Edit
                             </a>
@@ -123,5 +132,23 @@
     </div>
     <!-- /.card-body -->
 </div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const deleteButtons = document.querySelectorAll('form button[type="submit"]');
+        
+          deleteButtons.forEach(function(button) {
+              button.addEventListener('click', function(event) {
+                  event.preventDefault(); // Prevent the form from submitting immediately
+        
+                  const confirmation = confirm('Apakah Anda yakin ingin menghapus Acara ini?');
+        
+                  if (confirmation) {
+                      this.closest('form').submit(); // Submit the form if confirmed
+                  }
+              });
+          });
+        });
+        </script>
 
 @endsection

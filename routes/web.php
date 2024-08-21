@@ -85,6 +85,8 @@ Route::post('/kategoripesertas/{kategoripeserta}/isikategoripesertas', [IsiKateg
 // Route Pengguna
 Route::resource('users', UserController::class)->middleware('admin');
 
+Route::get('get-isi-kategori/{kategoriId}', [PesertaController::class, 'getIsiKategori'])->name('get.isi.kategori');
+
 Route::get('/get-isi-kategori/{kategoriId}', [PesertaController::class, 'getIsiKategori']);
 
 Route::get('/import-peserta/{event_id}', [PesertaController::class, 'showImportForm'])->name('import.pesertas');

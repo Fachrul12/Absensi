@@ -43,7 +43,7 @@ class KategoriController extends Controller
     $kategori->nama_kategori = $request->input('nama_kategori');
     $kategori->save();
 
-    return redirect()->route('kategoris.index');
+    return redirect()->route('kategoris.index')->with('success', 'Berhasil Menambahkan Kategori Acara');
 }
 
     /**
@@ -98,11 +98,21 @@ class KategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+{
+    try {
+        // Find the Kategori by its ID
         $kategori = Kategori::findOrFail($id);
+
+        // Delete the Kategori entry
         $kategori->delete();
 
+        // Redirect with a success message
         return redirect()->route('kategoris.index')->with('success', 'Kategori berhasil dihapus');
+    } catch (\Exception $e) {
+        // Redirect with an error message if something goes wrong
+        return redirect()->route('kategoris.index')->with('error', 'Gagal menghapus kategori. Silakan coba lagi.');
     }
+}
+
 }
 

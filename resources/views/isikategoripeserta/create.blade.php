@@ -4,7 +4,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Tambah isi kategori peserta</h1>
+          <h1 class="m-0">Tambah isi kategori peserta nnn</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -18,7 +18,7 @@
 </div>
 
 <div class="card card-primary ml-3 mr-3">
-    <div class="card-header">
+  <div class="card-header text-white"" style="background-color: #4a525a ;">
         <h3 class="card-title">Form isi kategori peserta</h3>
     </div>
     <!-- /.card-header -->

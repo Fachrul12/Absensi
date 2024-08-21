@@ -97,17 +97,20 @@ class PesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $peserta = Peserta::find($id);
-        if (!$peserta) {
-            return redirect()->back()->with('error', 'Peserta not found');
-        }
-        
-        $kategoriPesertas = KategoriPeserta::all();
-        $eventId = $peserta->event_id;
-
-        return view('peserta.edit', compact('peserta', 'eventId', 'kategoriPesertas'));
+{
+    $peserta = Peserta::find($id);
+    if (!$peserta) {
+        return redirect()->back()->with('error', 'Peserta not found');
     }
+    
+    $kategoriPesertas = KategoriPeserta::all();
+    $isiKategoriPesertas = IsiKategoriPeserta::where('kategori_peserta_id', $peserta->isiKategoriPeserta->kategori_peserta_id)->get();
+    $eventId = $peserta->event_id;
+
+    return view('peserta.edit', compact('peserta', 'kategoriPesertas', 'isiKategoriPesertas', 'eventId'));
+}
+
+
 
     /**
      * Update the specified resource in storage.
@@ -164,10 +167,11 @@ class PesertaController extends Controller
     }
 
     public function getIsiKategori($kategoriId)
-    {
-        $isiKategoriPesertas = IsiKategoriPeserta::where('kategori_peserta_id', $kategoriId)->get(['id', 'nama_isi_kategori_peserta']);
-        return response()->json($isiKategoriPesertas);
-    }
+{
+    $isiKategoriPesertas = IsiKategoriPeserta::where('kategori_peserta_id', $kategoriId)->get(['id', 'nama_isi_kategori_peserta']);
+    return response()->json($isiKategoriPesertas);
+}
+
 
     public function import(Request $request, $event_id)
 {

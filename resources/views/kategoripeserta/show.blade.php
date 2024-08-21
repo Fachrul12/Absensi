@@ -20,6 +20,18 @@
     <hr class="m-0">
 </div>
 
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 {{-- Button diatas table --}}
 <div class="col-md-2">
     <div class="ml-2 mt-3">
@@ -82,11 +94,7 @@
                     <td>{{ $isikategoripeserta->nama_isi_kategori_peserta }}</td>
                     <td class="project-actions text-right">
                         <div class="btn-group">
-                            <a class="btn btn-primary btn-sm" href="{{ url('/generate-qr-code/'.$isikategoripeserta->id) }}">
-                                <i class="fas fa-folder"></i>
-                                View
-                            </a>  
-                            {{-- <a class="btn btn-info btn-sm" href="{{ route('isikategoripesertas.edit', $isikategoripeserta->id) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('isikategoripesertas.edit', $isikategoripeserta->id) }}">
                                 <i class="fas fa-pencil-alt"></i>
                                 Edit
                             </a>
@@ -97,7 +105,7 @@
                                     <i class="fas fa-trash"></i>
                                     Delete
                                 </button>
-                            </form> --}}
+                            </form>
                         </div>
                     </td>
                 </tr>
@@ -107,5 +115,23 @@
     </div>
     <!-- /.card-body -->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const deleteButtons = document.querySelectorAll('form button[type="submit"]');
+    
+      deleteButtons.forEach(function(button) {
+          button.addEventListener('click', function(event) {
+              event.preventDefault(); // Prevent the form from submitting immediately
+    
+              const confirmation = confirm('Apakah Anda yakin ingin menghapus isi kategori ini?');
+    
+              if (confirmation) {
+                  this.closest('form').submit(); // Submit the form if confirmed
+              }
+          });
+      });
+    });
+    </script>
 
 @endsection

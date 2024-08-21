@@ -1,20 +1,47 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <h1>Tambah Background</h1>
-    <form action="{{ route('background.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="form-group">
-            <label for="name">Nama Background</label>
-            <input type="text" name="name" id="name" class="form-control" required>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Tambah Background</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ route('background.index') }}">Kembali</a></li>
+                    <li class="breadcrumb-item active">Tambah Background</li>
+                </ol>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="image">Gambar Background</label>
-            <input type="file" name="image" id="image" class="form-control-file" accept="image/*" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('background.index') }}" class="btn btn-secondary">Kembali</a>
-    </form>
+    </div>
+    <hr class="m-0">
 </div>
+
+<div class="card ml-3 mr-3">
+    <div class="card-header text-white"" style="background-color: #4a525a ;">
+        <h3 class="card-title">Form Tambah Background</h3>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <form action="{{ route('background.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="name">Nama Background</label>
+                <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Gambar Background</label>
+                <input type="file" name="image" id="image" class="form-control-file" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ route('background.index') }}" class="btn btn-secondary">Kembali</a>
+        </form>
+    </div>
+    <!-- /.card-body -->
+</div>
+
 @endsection

@@ -10,11 +10,34 @@ use Carbon\Carbon;
 
 class AbsensiController extends Controller
 {
-    public function index()
-    {
-        $events = Event::all();
-        return view('pages.absensi', compact('events'));
+    public function index(Request $request)
+{
+    $events = Event::query();
+
+    // Cek jika ada permintaan untuk pengurutan berdasarkan status
+    if ($request->has('sort') && $request->sort == 'status') {
+        $events = $events->get()->sortBy(function ($event) {
+            $tanggalAcara = \Carbon\Carbon::parse($event->tanggal_acara);
+            if ($tanggalAcara < now()->startOfDay()) {
+                return 3; // Selesai
+            } elseif ($tanggalAcara->isToday()) {
+                return 1; // Berlangsung
+            } else {
+                return 2; // Belum Selesai
+            }
+        });
+
+        // Pengurutan berdasarkan arah (asc/desc)
+        if ($request->get('direction') == 'desc') {
+            $events = $events->reverse();
+        }
+    } else {
+        $events = $events->get();
     }
+
+    return view('pages.absensi', compact('events'));
+}
+
 
     public function store(Request $request, $event)
 {

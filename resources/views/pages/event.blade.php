@@ -17,6 +17,19 @@
         </div>
         <hr class="m-0">
     </div>
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
     <div class="row"> 
         <div class="col-md-2">
             <div class="ml-3 mt-3 mb-3">
@@ -28,7 +41,7 @@
     </div>
 
     <div class="card ml-3 mr-3">
-        <div class="card-header">
+        <div class="card-header text-white"" style="background-color: #4a525a ;">
             <h3 class="card-title">List Acara</h3>
             <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -76,21 +89,18 @@
                             <td class="project-actions text-right">
                                 <div class="btn-group">
                                     <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('events.show', $event->id) }}">
-                                        <i class="fas fa-folder"></i>
-
+                                        <i class="fas fa-eye"></i>
                                         Lihat
                                     </a>
-                                    <a class="btn btn-info btn-sm d-inline mr-1" href="{{ route('events.edit', $event->id) }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('events.edit', $event->id) }}">
                                         <i class="fas fa-pencil-alt"></i>
-
-                                        Ubah
+                                        Edit
                                     </a>
                                     <form action="{{ route('events.destroy', $event->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm ml-1">
                                             <i class="fas fa-trash"></i>
-
                                             Hapus
                                         </button>
                                     </form>
@@ -102,5 +112,23 @@
             </table>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const deleteButtons = document.querySelectorAll('form button[type="submit"]');
+        
+          deleteButtons.forEach(function(button) {
+              button.addEventListener('click', function(event) {
+                  event.preventDefault(); // Prevent the form from submitting immediately
+        
+                  const confirmation = confirm('Apakah Anda yakin ingin menghapus Acara ini?');
+        
+                  if (confirmation) {
+                      this.closest('form').submit(); // Submit the form if confirmed
+                  }
+              });
+          });
+        });
+        </script>
 
 @endsection

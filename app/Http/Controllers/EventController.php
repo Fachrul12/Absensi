@@ -46,7 +46,7 @@ class EventController extends Controller
     $event->status = 0; // Set a default value for status
     $event->save(); // Save the event instance first
 
-    return redirect()->route('events.index');
+    return redirect()->route('events.index')->with('success', 'Berhasil Menambahkan Acara');
 }
 
     /**

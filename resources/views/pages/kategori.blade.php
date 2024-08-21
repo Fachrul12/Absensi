@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Kelola Kategori kategori</h1>
+          <h1 class="m-0">Kelola Kategori Acara</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -18,7 +18,19 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
     <hr class="m-0">
-  </div>
+  </div>  
+
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
   {{-- Button diatas table --}}
     <div class="col-md-2">
@@ -31,8 +43,8 @@
       
 
 <div class="card ml-3">
-    <div class="card-header">
-      <h3 class="card-title">List Kategori</h3>   
+  <div class="card-header text-white"" style="background-color: #4a525a ;">
+      <h3 class="card-title">List Kategori Acara</h3>   
       <div class="card-tools">
         <div class="input-group input-group-sm" style="width: 150px;">
           <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -83,5 +95,25 @@
       </table>
     </div>
     <!-- /.card-body -->
-  </div>
+  </div>  
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const deleteButtons = document.querySelectorAll('form button[type="submit"]');
+    
+      deleteButtons.forEach(function(button) {
+          button.addEventListener('click', function(event) {
+              event.preventDefault(); // Prevent the form from submitting immediately
+    
+              const confirmation = confirm('Apakah Anda yakin ingin menghapus isi kategori ini?');
+    
+              if (confirmation) {
+                  this.closest('form').submit(); // Submit the form if confirmed
+              }
+          });
+      });
+    });
+    </script>
+
+ 
 @endsection

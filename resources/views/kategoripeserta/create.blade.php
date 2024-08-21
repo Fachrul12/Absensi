@@ -21,23 +21,19 @@
   </div>
 
   <div class="card ml-3 mr-3">
-    <div class="card-header">
+    <div class="card-header text-white"" style="background-color: #4a525a ;">
       <h3 class="card-title">Form Tambah kategori peserta</h3>      
     </div>
     <!-- /.card-header -->
 
     <div class="card-body">
       <form action="{{ route('kategoripesertas.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="row">
-          <div class="col-md-6">
+        @csrf        
             <div class="form-group">
               <label for="nama_kategori_peserta">Nama kategori peserta</label>
               <input type="text" class="form-control" id="nama_kategori_peserta" name="nama_kategori_peserta" required>
-            </div>
-          </div>          
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Tambah kategori peserta</button>
+            </div>         
+        <button type="submit" class="btn btn-primary">Tambah kategori peserta</button>
       </form>
     </div>
     <!-- /.card-body -->

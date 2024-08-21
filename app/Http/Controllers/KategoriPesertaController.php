@@ -42,7 +42,7 @@ class KategoriPesertaController extends Controller
         $kategoripeserta->save();
 
         // Redirect to the kategoripeserta list page
-        return redirect()->route('kategoripesertas.index');
+        return redirect()->route('kategoripesertas.index')->with('success', 'Berhasil Menambahkan Kategori Peserta');
     }
 
     /**
@@ -99,10 +99,25 @@ class KategoriPesertaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+{
+    try {
         $kategoripeserta = KategoriPeserta::findOrFail($id);
+
+        // Attempt to delete the category
         $kategoripeserta->delete();
 
-        return redirect()->route('kategoripesertas.index')->with('success', 'kategori peserta deleted successfully!');
+        return redirect()->route('kategoripesertas.index')
+            ->with('success', 'Kategori peserta deleted successfully!');
+    } catch (\Illuminate\Database\QueryException $e) {
+        // Check for foreign key constraint violation
+        if ($e->getCode() == "23000") {
+            return redirect()->route('kategoripesertas.index')
+                ->with('error', 'Kategori peserta ini tidak dapat dihapus karena digunakan oleh peserta lain.');
+        }
+
+        // Re-throw the exception if it's not a foreign key constraint issue
+        throw $e;
     }
+}
+
 }
