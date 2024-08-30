@@ -16,6 +16,11 @@ class Event extends Model
         'tanggal_acara',
     ];
 
+    public function pesertas()
+    {
+        return $this->hasMany(Peserta::class);
+    }
+
     public function peserta()
     {
     return $this->hasMany(Peserta::class);

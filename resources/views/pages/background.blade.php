@@ -102,7 +102,7 @@
                             <form action="{{ route('background.destroy', $background->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
+                                <button type="submit" class="btn btn-danger btn-sm btn-delete">
                                     <i class="fas fa-trash"></i> Delete
                                 </button>
                             </form>
@@ -121,7 +121,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const deleteButtons = document.querySelectorAll('form button[type="submit"]');
+      const deleteButtons = document.querySelectorAll('button.btn-delete');
     
       deleteButtons.forEach(function(button) {
           button.addEventListener('click', function(event) {

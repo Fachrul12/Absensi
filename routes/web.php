@@ -115,3 +115,10 @@ Route::get('/preview/{backgroundId}', [QRCodeController::class, 'showPreview'])-
 
 Route::post('/save-preview', [QRCodeController::class, 'savePreview'])->name('save.preview');
 
+
+Route::get('/events/{id}/export', [EventController::class, 'export'])->name('events.export');
+
+Route::post('/events/import', [EventController::class, 'import'])->name('events.import');
+Route::get('absensi/export/{event}', [AbsensiController::class, 'export'])->name('absensi.export');
+Route::get('/events/{id}/export-kehadiran', [EventController::class, 'exportKehadiran'])->name('events.exportKehadiran');
+

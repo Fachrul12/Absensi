@@ -88,5 +88,7 @@ class AbsensiController extends Controller
         $pesertas = Peserta::where('event_id', $id)->with('kehadiran')->get();
         return view('absensi.view', compact('event', 'pesertas'));
     }
+
+    
     
 }

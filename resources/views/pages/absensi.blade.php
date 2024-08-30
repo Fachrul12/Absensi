@@ -16,9 +16,23 @@
             </div>
         </div>
         <hr class="m-0">
-    </div>   
+    </div>
+
+    <!-- Import JSON Form -->
+    <form action="{{ route('events.import') }}" method="POST" enctype="multipart/form-data" class="d-inline-block mb-3 ml-3">
+        @csrf
+        <div class="input-group">
+            <input type="file" name="import_file" class="form-control-file">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-success btn-sm">
+                    <i class="fas fa-upload"></i> Import JSON
+                </button>
+            </div>
+        </div>
+    </form>
+
     <div class="card ml-3 mr-3">
-        <div class="card-header text-white"" style="background-color: #4a525a ;">
+        <div class="card-header text-white" style="background-color: #4a525a;">
             <h3 class="card-title">List Acara</h3>
             <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -31,6 +45,7 @@
                 </div>
             </div>
         </div>
+
         <div class="card-body p-0">
             <table class="table table-condensed table-striped">
                 <thead>
@@ -59,7 +74,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $event->nama_event }}</td>
-                            <td>{{ optional($event->peserta)->count()?? 0 }}</td>
+                            <td>{{ optional($event->peserta)->count() ?? 0 }}</td>
                             <td>{{ $event->tanggal_acara }}</td>
                             <td>
                                 @php
@@ -74,13 +89,9 @@
                                 @endif
                             </td>
                             <td class="project-actions text-right">
-                                <div class="btn-group">
-                                    <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('absensi.show', $event->id) }}">
-                                        <i class="fas fa-folder"></i>
-
-                                        Lihat
-                                    </a>                                    
-                                </div>
+                                <a class="btn btn-primary btn-sm d-inline mr-1" href="{{ route('absensi.show', $event->id) }}">
+                                    <i class="fas fa-folder"></i> Lihat
+                                </a>                                    
                             </td>
                         </tr>
                     @endforeach
@@ -88,5 +99,4 @@
             </table>
         </div>
     </div>
-
 @endsection

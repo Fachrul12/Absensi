@@ -104,6 +104,10 @@
                                             Hapus
                                         </button>
                                     </form>
+                                    <a class="btn btn-warning btn-sm ml-1" href="{{ route('events.export', $event->id) }}">
+                                        <i class="fas fa-file-export"></i>
+                                        Export
+                                    </a>
                                 </div>
                             </td>
                         </tr>
