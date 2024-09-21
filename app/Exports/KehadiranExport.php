@@ -29,7 +29,7 @@ class KehadiranExport implements FromCollection, WithHeadings
 
                 return [
                     'ID' => $kehadiran->id,
-                    'Nama Peserta' => $kehadiran->peserta->nama_peserta ?? 'N/A',
+                    'Nama Peserta' => $kehadiran->peserta->nama_peserta ?? 'N/A',                
                     'Status Kehadiran' => $kehadiran->tanggal_hadir ? 'Hadir' : 'Tidak Hadir',
                     'Tanggal Kehadiran' => $tanggalHadir ? $tanggalHadir->format('Y-m-d') : 'N/A'
                 ];
@@ -43,7 +43,7 @@ class KehadiranExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
-            'Nama Peserta',
+            'Nama Peserta',            
             'Status Kehadiran',
             'Tanggal Kehadiran'
         ];
